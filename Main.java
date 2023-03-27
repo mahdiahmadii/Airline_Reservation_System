@@ -5,37 +5,47 @@ public class Main {
         SimpleUser[] simpleUsers = new SimpleUser[10];
         Users users = new Users();
         Admin admin = new Admin();
+
+        //as author of this program I am right to have an account :)))))))))))
         SimpleUser firstUser = new SimpleUser("mahdi","ahmadi","mahdiahmadi");
         Users.setSimpleUser(firstUser);
+
+        //set the admin
         users.setAdmin(admin);
+
+
         do {
-            System.out.println("1-signin\n2-signup");
+
+            //option menu
+            ShowFunction.optionMenu();
             String command = input.next();
+
+
+            /**
+             * sign up section
+             */
+            //----------------------------------------------
             while (command.equals("2")) {
-                System.out.print("input your username:");
-                String user_name = input.next();
-                System.out.print("\ninput your password:");
-                String user_pass = input.next();
-                System.out.print("\ninput your name:");
-                String name_of_user = input.next();
-                SimpleUser simpleUser = new SimpleUser(user_name, user_pass, name_of_user);
-                Users.setSimpleUser(simpleUser);
+                ShowFunction.signUpSection();
                 command="0";
             }
             if(command.equals("0"))
             {
                 continue;
             }
+            //----------------------------------------------
+
+
+            /**
+             * signIn menu
+             */
             while (command.equals("1"))
             {
                 if (command.equals("1")) {
-                    System.out.println(users.getAdmin().getPassword());
-                    System.out.println(users.getAdmin().getName());
                     System.out.print("usename:");
                     String user_name = input.next();
                     System.out.print("password:");
                     String user_pass = input.next();
-                    System.out.println(Users.n);
                     for (int i = 0; i < Users.n ; i++)
                     {
                         int elsee =0;
@@ -44,9 +54,6 @@ public class Main {
                                 System.out.println("welcome");
                                 break;
                             }
-                            /*else {
-                                System.out.println("wrong password!");
-                            }*/
                         }
                         else if(user_name.equals(users.getAdmin().getName()))
                         {
