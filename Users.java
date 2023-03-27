@@ -1,6 +1,6 @@
 public class Users {
     public static SimpleUser[] simpleUsers = new SimpleUser[20];
-    private Admin admin = new Admin();
+    public Admin admin = new Admin();
     public static int n;
     /*public Users()
     {

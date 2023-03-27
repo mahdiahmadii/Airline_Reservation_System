@@ -4,6 +4,8 @@ public class Flight {
     private String time;
     private int price;
     private int seats;
+    private String flightID;
+    private String date;
 
     //-------------------------------------------------------
 
@@ -39,6 +41,22 @@ public class Flight {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getFlightID() {
+        return flightID;
+    }
+
+    public void setFlightID(String flightID) {
+        this.flightID = flightID;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public int getPrice() {
