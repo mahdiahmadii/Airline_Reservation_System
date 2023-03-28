@@ -96,30 +96,11 @@ public class ShowFunction {
             {
 
 
-                while(user_pass.equals("admin"))//admin log in
+                while(user_pass.equals("admin"))//admin log in menu
                 {
                     ShowFunction.adminMenuShow();
                     String command = input.next();
-                    while (command.equals("1"))//add flight menu
-                    {
-                        ShowFunction.showAddFlight();
-                        break;
-                    }
-                    while (command.equals("2"))
-                    {
-                        ShowFunction.showUpdateMenu();
-                        break;
-                    }
-                    while(command.equals("3"))
-                    {
-                        showRemoveFlight();
-                        break;
-                    }
-                    while(command.equals("4"))//show schedule menu
-                    {
-                        showFlightCharts();
-                        break;
-                    }
+                    adminSignInMenu(command);
                     if(command.equals("0"))
                     {
                         break;
@@ -257,8 +238,32 @@ public class ShowFunction {
                 break;
             }
         }
+    }
 
+    //*********************************************************************************************
 
+    public static void adminSignInMenu(String command)
+    {
+        while (command.equals("1"))//add flight menu
+        {
+            ShowFunction.showAddFlight();
+            break;
+        }
+        while (command.equals("2"))
+        {
+            ShowFunction.showUpdateMenu();
+            break;
+        }
+        while(command.equals("3"))
+        {
+            showRemoveFlight();
+            break;
+        }
+        while(command.equals("4"))//show schedule menu
+        {
+            showFlightCharts();
+            break;
+        }
     }
 
 
