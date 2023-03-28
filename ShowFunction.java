@@ -37,7 +37,7 @@ public class ShowFunction {
         System.out.println("                    2-Update                    ");
         System.out.println("                    3-remove                    ");
         System.out.println("                 4-FlightSchedule               ");
-        System.out.println("                    0-logOut                    ");
+        System.out.println("                    0-LogOut                    ");
         System.out.println("................................................");
         System.out.print(">>");
     }
@@ -60,7 +60,7 @@ public class ShowFunction {
 
     }
 
-//****************************************************************************************
+//****************************************************************************************signinmenu(all)
     public static void signInMenu()
     {
         Scanner input = new Scanner(System.in);
@@ -99,6 +99,17 @@ public class ShowFunction {
                 if(user_pass.equals("admin"))
                 {
                     ShowFunction.adminMenuShow();
+                    String command = input.next();
+                    while (command.equals("1"))//add flight menu
+                    {
+                        ShowFunction.showAddFlight();
+                        break;
+                    }
+                    while(command.equals("4"))//show schedule menu
+                    {
+                        showFlightCharts();
+                        break;
+                    }
                     break;
                 }
             }
@@ -133,4 +144,49 @@ public class ShowFunction {
 
     }
     //*******************************************************************************************
+    public static void showAddFlight(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("............................................................");
+        System.out.println("                         ADD FLIGHT                         ");
+        System.out.println("............................................................");
+        System.out.println("Enter flight ID :");
+        String Id = input.next();
+        System.out.print("Enter flight origin: ");
+        String origin = input.next();
+        System.out.print("Enter flight destination: ");
+        String destination = input.next();
+        System.out.print("Enter flight date: ");
+        String date = input.next();
+        System.out.print("Enter flight time: ");
+        String time = input.next();
+        System.out.println("Enter flight price: ");
+        int price = input.nextInt();
+        System.out.println("Enter flight seats: ");
+        int seats = input.nextInt();
+
+
+        Flight ticket = new Flight(Id,origin,destination,date,time,price,seats);
+        Flights.setFlight(ticket);
+    }
+
+
+     //**********************************************************************************************
+
+
+    //*****************************************************************************************
+    public static void showFlightCharts(){
+        System.out.println("..........................................................");
+        System.out.println("                      flightschedule                      ");
+        System.out.println("..........................................................");
+        for(int i = 0; i < Flights.n ; i++){
+            System.out.println(Flights.flight[i].getFlightID());
+            System.out.println(Flights.flight[i].getOrigin());
+            System.out.println(Flights.flight[i].getDestination());
+            System.out.println(Flights.flight[i].getDate());
+            System.out.println(Flights.flight[i].getTime());
+            System.out.println(Flights.flight[i].getPrice());
+            System.out.println(Flights.flight[i].getSeats());
+            System.out.println("........................................................");
+        }
+    }
 }

@@ -9,10 +9,12 @@ public class Flight {
 
     //-------------------------------------------------------
 
-    public Flight(String origin ,String destination ,String time ,int price ,int seats)
+    public Flight(String flightID,String origin ,String destination ,String date,String time ,int price ,int seats)
     {
+        this.flightID=flightID;
         this.origin = origin;
         this.destination = destination;
+        this.date = date;
         this.time = time;
         this.price = price;
         this.seats = seats;

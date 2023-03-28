@@ -2,7 +2,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         Scanner input = new Scanner(System.in);
-        SimpleUser[] simpleUsers = new SimpleUser[10];
         Users users = new Users();
         Admin admin = new Admin();
 
