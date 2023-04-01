@@ -3,7 +3,7 @@ public class SimpleUser {
     private String userPass;
     private int charge;
     private String name;
-
+    
     //---------------------------------------------
     public SimpleUser()
     {

@@ -54,7 +54,7 @@ public class ShowFunction {
         System.out.println("                1-Change Password                   ");
         System.out.println("               2-Search Flight Ticket               ");
         System.out.println("                3-Booking Ticket                    ");
-        System.out.println("                 4-Booked TIcket                    ");
+        System.out.println("                 4-Booked TIckets                   ");
         System.out.println("              5-Ticket Cancellation                 ");
         System.out.println("                  6-Add charge                      ");
         System.out.println("                   0-Sign Out                       ");
@@ -281,18 +281,32 @@ public class ShowFunction {
 
     public static void showRemoveFlight(){
         Scanner input = new Scanner(System.in);
-        ShowFunction.showFlightCharts();
-        System.out.print("Enter the FLight ID you want to remove: ");
-        String removedId = input.next();
-
-        for(int i =0 ; i<Flights.n ; i++)
-        {
-            if(Flights.flight[i].getFlightID().equals(removedId)) {
-                for(int j=i ; j < Flights.n - 1 ; j++)
-                {
-                    Flights.flight[j]=Flights.flight[j+1];
+        while(true) {
+            ShowFunction.showFlightCharts();
+            System.out.println(".....................................................................");
+            System.out.println("                             REMOVE FLIGHT                           ");
+            System.out.println(".....................................................................");
+            System.out.print("Enter the FLight ID you want to remove or 0 to return back: ");
+            String removedId = input.next();
+            if(removedId.equals("0"))
+            {
+                break;
+            }
+            for (int i = 0; i < Flights.n; i++) {
+                if (Flights.flight[i].getFlightID().equals(removedId)) {
+                    for (int j = i; j < Flights.n - 1; j++) {
+                        Flights.flight[j] = Flights.flight[j + 1];
+                    }
+                    Flights.n = Flights.n - 1;
+                    break;
                 }
-                Flights.n=Flights.n - 1;
+            }
+            System.out.println("The flight " + removedId + "has been removed!");
+            System.out.println("press 0 to return to admin main menu");
+            System.out.print(">>");
+            String command = input.next();
+            if(command.equals("0"))
+            {
                 break;
             }
         }
