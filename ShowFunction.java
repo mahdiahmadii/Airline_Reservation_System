@@ -1,3 +1,5 @@
+import com.sun.security.jgss.GSSUtil;
+
 import java.sql.SQLOutput;
 import java.util.Scanner;
 public class ShowFunction {
@@ -52,9 +54,10 @@ public class ShowFunction {
         System.out.println("                1-Change Password                   ");
         System.out.println("               2-Search Flight Ticket               ");
         System.out.println("                3-Booking Ticket                    ");
-        System.out.println("              4-Ticket Cancellation                 ");
-        System.out.println("                  5-Add charge                      ");
-        System.out.println("                  0-Sign Out                        ");
+        System.out.println("                 4-Booked TIcket                    ");
+        System.out.println("              5-Ticket Cancellation                 ");
+        System.out.println("                  6-Add charge                      ");
+        System.out.println("                   0-Sign Out                       ");
         System.out.println("....................................................");
         System.out.print(">>");
 
@@ -81,6 +84,11 @@ public class ShowFunction {
                         changepassword(Users.simpleUsers[i]);
                         break;
                     }
+                    while(command.equals("2"))
+                    {
+                        showFlightCharts();
+                        break;
+                    }
 
                     //here will be updated Soon!
 
@@ -89,7 +97,10 @@ public class ShowFunction {
                         ShowFunction.showaddchargemenu(Users.simpleUsers[i]);
                         break;
                     }
-                    break;
+                    if(command.equals("0"))
+                    {
+                        break;
+                    }
                 }
             }
             else if(user_name.equals("admin"))
@@ -143,7 +154,7 @@ public class ShowFunction {
         System.out.println("............................................................");
         System.out.println("                         ADD FLIGHT                         ");
         System.out.println("............................................................");
-        System.out.println("Enter flight ID :");
+        System.out.print("Enter flight ID :");
         String Id = input.next();
         System.out.print("Enter flight origin: ");
         String origin = input.next();
@@ -169,18 +180,21 @@ public class ShowFunction {
 
     //*****************************************************************************************
     public static void showFlightCharts(){
-        System.out.println("..........................................................");
-        System.out.println("                     FLIGHT SCHEDULE                      ");
-        System.out.println("..........................................................");
+        System.out.println("                                              ..........................................................");
+        System.out.println("                                                                   FLIGHT SCHEDULE                      ");
+        System.out.println("                                              ..........................................................");
+        System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-6s |\n","FLiGHT ID","ORIGIN","DESTINATION","DATE","TIME","price","SEAT");
+        System.out.println("...............................................................................................................................................");
         for(int i = 0; i < Flights.n ; i++){
-            System.out.println(Flights.flight[i].getFlightID());
+            System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20d | %-6d |\n",Flights.flight[i].getFlightID(),Flights.flight[i].getOrigin(),Flights.flight[i].getDestination(),Flights.flight[i].getDate(),Flights.flight[i].getTime(),Flights.flight[i].getPrice(),Flights.flight[i].getSeats());
+            /*System.out.println(Flights.flight[i].getFlightID());
             System.out.println(Flights.flight[i].getOrigin());
             System.out.println(Flights.flight[i].getDestination());
             System.out.println(Flights.flight[i].getDate());
             System.out.println(Flights.flight[i].getTime());
             System.out.println(Flights.flight[i].getPrice());
-            System.out.println(Flights.flight[i].getSeats());
-            System.out.println(".......................................................");
+            System.out.println(Flights.flight[i].getSeats());*/
+            System.out.println("...............................................................................................................................................");
         }
     }
 
@@ -199,20 +213,64 @@ public class ShowFunction {
         String id = input.next();
         for(int i =0 ; i<Flights.n ; i++)
         {
-            if(Flights.flight[i].getFlightID().equals(id))
+            while(Flights.flight[i].getFlightID().equals(id))
             {
-                System.out.print("Enter flight origin: ");
-                Flights.flight[i].setOrigin(input.next());
-                System.out.print("Enter flight destination: ");
-                Flights.flight[i].setDestination(input.next());
-                System.out.print("Enter flight date: ");
-                Flights.flight[i].setDate(input.next());
-                System.out.print("Enter flight time: ");
-                Flights.flight[i].setTime(input.next());
-                System.out.print("Enter flight price: ");
-                Flights.flight[i].setPrice(input.nextInt());
-                System.out.print("Enter flight seats: ");
-                Flights.flight[i].setSeats(input.nextInt());
+                System.out.println("wich one you want to update?");
+                System.out.println("1-origin");
+                System.out.println("2-destination");
+                System.out.println("3-date");
+                System.out.println("4-time");
+                System.out.println("5-price");
+                System.out.println("6-seats");
+                System.out.println("0-LogOut");
+                System.out.print(">>");
+                String commandForUpdate = input.next();
+                while(commandForUpdate.equals("1"))
+                {
+                    System.out.print("input the new origin: ");
+                    Flights.flight[i].setOrigin(input.next());
+                    System.out.println("Updated successfully!");
+                    break;
+                }
+                while(commandForUpdate.equals("2"))
+                {
+                    System.out.print("input the new destination: ");
+                    Flights.flight[i].setDestination(input.next());
+                    System.out.println("Updated successfully!");
+                    break;
+                }
+                while(commandForUpdate.equals("3"))
+                {
+                    System.out.print("input the new date: ");
+                    Flights.flight[i].setDate(input.next());
+                    System.out.println("Updated successfully!");
+                    break;
+                }
+                while(commandForUpdate.equals("4"))
+                {
+                    System.out.print("input the new time: ");
+                    Flights.flight[i].setTime(input.next());
+                    System.out.println("Updated successfully!");
+                    break;
+                }
+                while(commandForUpdate.equals("5"))
+                {
+                    System.out.print("input the price : ");
+                    Flights.flight[i].setPrice(input.nextInt());
+                    System.out.println("Updated successfully!");
+                    break;
+                }
+                while(commandForUpdate.equals("6"))
+                {
+                    System.out.print("input the new seats : ");
+                    Flights.flight[i].setSeats(input.nextInt());
+                    System.out.println("Updated successfully!");
+                    break;
+                }
+                if(commandForUpdate.equals("0"))
+                {
+                    break;
+                }
             }
         }
         System.out.println("...........................................................");
