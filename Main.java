@@ -19,8 +19,13 @@ public class Main {
         //set the admin
         users.setAdmin(admin);
 
-
-
+        System.out.print(ColorFullTextsAndBackground.CYAN);
+        TextArt.animationplne();
+        TextArt.cls();
+        System.out.print(ColorFullTextsAndBackground.YELLOW);
+        TextArt.welcome();
+        TextArt.cls();
+        System.out.print(ColorFullTextsAndBackground.RESET);
         do {
             /**
              * option menu

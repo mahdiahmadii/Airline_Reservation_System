@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.lang.Thread;
 public class TextArt {
 
+
     /**
      * function use to show a "welcome" text in a special format for 1 second
      */
