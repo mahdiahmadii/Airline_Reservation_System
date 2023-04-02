@@ -3,7 +3,14 @@ public class SimpleUser {
     private String userPass;
     private int charge;
     private String name;
-    
+    //----------------------------------------------
+    public Ticket[] userTicket = new Ticket[10];
+    public int k;
+    public void setTicket(Ticket ticket)
+    {
+        this.userTicket[k] = ticket;
+        k++;
+    }
     //---------------------------------------------
     public SimpleUser()
     {

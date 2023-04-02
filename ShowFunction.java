@@ -2,6 +2,7 @@ import com.sun.security.jgss.GSSUtil;
 
 import java.sql.SQLOutput;
 import java.util.Scanner;
+import java.util.Random;
 public class ShowFunction {
 
     public static void optionMenu() {
@@ -76,7 +77,7 @@ public class ShowFunction {
             if (user_name.equals(Users.simpleUsers[i].getUserName())) {
 
 
-                if (user_pass.equals(Users.simpleUsers[i].getUserPass())) {//simple user log in:
+                while (user_pass.equals(Users.simpleUsers[i].getUserPass())) {//simple user log in:
                     ShowFunction.simpleUserSignInMenu();
                     String command = input.next();
                     while(command.equals("1"))//change password
@@ -87,12 +88,79 @@ public class ShowFunction {
                     while(command.equals("2"))
                     {
                         showFlightCharts();
+                        //to be contined...
+                        break;
+                    }
+                    while(command.equals("3"))
+                    {
+                        showFlightCharts();
+                        System.out.println("....................................................................");
+                        System.out.println("                            BOOKING TICKET                          ");
+                        System.out.println("....................................................................");
+                        for(int j =0;j<Flights.n;j++)
+                        {
+                            System.out.println("ID :"+Flights.flight[j].getFlightID());
+                        }
+                        System.out.println("please Enter the ID of flight you want to buy: ");
+                        String flightId = input.next();
+                        for(int j =0 ; j <= Flights.n -1 ;j++)
+                        {
+                            if(Flights.flight[j].getFlightID().equals(flightId))
+                            {
+                                if(Users.simpleUsers[i].getCharge() >= Flights.flight[j].getPrice()&& Flights.flight[j].getSeats()>=1) {
+                                    String flightID = Flights.flight[j].getFlightID();
+                                    String origin = Flights.flight[j].getOrigin();
+                                    String destination = Flights.flight[j].getDestination();
+                                    String date = Flights.flight[j].getDate();
+                                    String time = Flights.flight[j].getOrigin();
+                                    int price = Flights.flight[j].getPrice();
+                                    String passangername = Users.simpleUsers[i].getUsername();
+                                    String uniqTicketID = uniqStringGenerator(20);
+                                    Flights.flight[j].setSeats(Flights.flight[j].getSeats()-1);
+                                    Users.simpleUsers[i].setCharge(Users.simpleUsers[i].getCharge()-Flights.flight[j].getPrice());
+
+
+                                    Ticket ticket = new Ticket(flightID, origin, destination, date, time, price, passangername, uniqTicketID);
+                                    Users.simpleUsers[i].setTicket(ticket);
+                                    System.out.println("booked seccessfully!");
+                                }
+                                else if (Users.simpleUsers[i].getCharge()<Flights.flight[j].getPrice()){
+                                    System.out.println("Not enough charge!");
+                                }
+                                else if(Flights.flight[j].getSeats()<1)
+                                {
+                                    System.out.println("doesn't have any empty seats!");
+                                }
+                            }
+                        }
+                        break;
+
+
+                    }
+                    while(command.equals("4"))
+                    {
+                        System.out.println("                                               .................................................................");
+                        System.out.println("                                                                           BOOKED TICKET                        ");
+                        System.out.println("                                               .................................................................");
+                        System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-6s |\n","FLiGHT ID","ORIGIN","DESTINATION","DATE","TIME","Price","TicketID");
+                        for(int j =0 ; j < Users.simpleUsers[i].k ; j++)
+                        {
+                            System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-6s |\n",Users.simpleUsers[i].userTicket[j].getFlightId(),Users.simpleUsers[i].userTicket[j].getOrigin(),Users.simpleUsers[i].userTicket[j].getDestination(),Users.simpleUsers[i].userTicket[j].getDate(),Users.simpleUsers[i].userTicket[j].getTime(),Users.simpleUsers[i].userTicket[j].getPrice(),Users.simpleUsers[i].userTicket[j].getTicketId());
+
+                            /*System.out.println(Users.simpleUsers[i].userTicket[j].getTicketId());
+                            System.out.println(Users.simpleUsers[i].userTicket[j].getFlightId());
+                            System.out.println(Users.simpleUsers[i].userTicket[j].getPassangerName());*/
+                        }
                         break;
                     }
 
-                    //here will be updated Soon!
+                    while(command.equals("5"))
+                    {
+                        //cancel ticket
+                        break;
+                    }
 
-                    while (command.equals("5"))//add charge menu
+                    while (command.equals("6"))//add charge menu
                     {
                         ShowFunction.showaddchargemenu(Users.simpleUsers[i]);
                         break;
@@ -101,6 +169,7 @@ public class ShowFunction {
                     {
                         break;
                     }
+
                 }
             }
             else if(user_name.equals("admin"))
@@ -337,7 +406,18 @@ public class ShowFunction {
             break;
         }
     }
-
+//*************************************************************************************************************
+    public static String uniqStringGenerator(int l)
+    {
+        String str1 = " ";
+        String alphabet = "abcdefghijklmnopqrstuvwxyz1234567890";
+        Random rand = new Random();
+        for(int i = 0 ; i < l ; i++)
+        {
+            str1 = str1 + alphabet.charAt(Math.abs(rand.nextInt())%35);
+        }
+        return str1;
+    }
 
 
 }
