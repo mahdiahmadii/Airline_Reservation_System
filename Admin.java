@@ -1,8 +1,14 @@
 public class Admin {
+    /**
+     * features
+     */
     private String name = "admin";
     private String password = "admin";
-    //______________________________
+//____________________________________________________________
 
+    /**
+     *Getter & Setter
+     */
     public String getName() {
         return name;
     }

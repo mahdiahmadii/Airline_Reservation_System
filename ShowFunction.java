@@ -1,10 +1,10 @@
-import com.sun.security.jgss.GSSUtil;
-
-import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.Random;
-public class ShowFunction {
 
+/**
+ * This class is consist of functions used to make the program!
+ */
+public class ShowFunction {
     public static void optionMenu() {
         System.out.println("...........................................................");
         System.out.println("               Airline Reservation System                  ");
@@ -14,7 +14,11 @@ public class ShowFunction {
         System.out.println("...........................................................");
         System.out.print(">>");
     }
-    //*********************************************************************************************
+//*********************************************************************************************
+
+    /**
+     * this function use for sign up !
+     */
     public static void signUpSection(){
         Scanner input = new Scanner(System.in);
         System.out.println("....................................................");
@@ -32,6 +36,10 @@ public class ShowFunction {
         System.out.println("....................................................");
     }
 //***********************************************************************************************
+
+    /**
+     * This function use to print the menu of admin
+     */
     public static void adminMenuShow(){
         System.out.println("................................................");
         System.out.println("                Admin Menu Option               ");
@@ -45,8 +53,11 @@ public class ShowFunction {
         System.out.print(">>");
     }
 
-    //*******************************************************************************************
+//*******************************************************************************************
 
+    /**
+     * This function print the menu of simpleUsers!
+     */
     public static void simpleUserSignInMenu()
     {
         System.out.println("....................................................");
@@ -55,7 +66,7 @@ public class ShowFunction {
         System.out.println("                1-Change Password                   ");
         System.out.println("               2-Search Flight Ticket               ");
         System.out.println("                3-Booking Ticket                    ");
-        System.out.println("                 4-Booked TIckets                   ");
+        System.out.println("                 4-Booked Tickets                   ");
         System.out.println("              5-Ticket Cancellation                 ");
         System.out.println("                  6-Add charge                      ");
         System.out.println("                   0-Sign Out                       ");
@@ -64,7 +75,11 @@ public class ShowFunction {
 
     }
 
-//****************************************************************************************signinmenu(all)
+//****************************************************************************************signInMenu(all)
+
+    /**
+     * This function use for sign in!
+     */
     public static void signInMenu()
     {
         Scanner input = new Scanner(System.in);
@@ -82,128 +97,46 @@ public class ShowFunction {
                     String command = input.next();
                     while(command.equals("1"))//change password
                     {
-                        changepassword(Users.simpleUsers[i]);
+                        changePassword(Users.simpleUsers[i]);
                         break;
                     }
                     while(command.equals("2"))
                     {
                         showFlightCharts();
-                        //to be contined...
+                        //to be continued...
                         break;
                     }
                     while(command.equals("3"))
                     {
                         showFlightCharts();
-                        System.out.println("....................................................................");
-                        System.out.println("                            BOOKING TICKET                          ");
-                        System.out.println("....................................................................");
-                        for(int j =0;j<Flights.n;j++)
-                        {
-                            System.out.println("ID :"+Flights.flight[j].getFlightID());
-                        }
-                        System.out.println("please Enter the ID of flight you want to buy: ");
-                        String flightId = input.next();
-                        for(int j =0 ; j <= Flights.n -1 ;j++)
-                        {
-                            if(Flights.flight[j].getFlightID().equals(flightId))
-                            {
-                                if(Users.simpleUsers[i].getCharge() >= Flights.flight[j].getPrice()&& Flights.flight[j].getSeats()>=1) {
-                                    String flightID = Flights.flight[j].getFlightID();
-                                    String origin = Flights.flight[j].getOrigin();
-                                    String destination = Flights.flight[j].getDestination();
-                                    String date = Flights.flight[j].getDate();
-                                    String time = Flights.flight[j].getOrigin();
-                                    int price = Flights.flight[j].getPrice();
-                                    String passangername = Users.simpleUsers[i].getUsername();
-                                    String uniqTicketID = uniqStringGenerator(20);
-                                    Flights.flight[j].setSeats(Flights.flight[j].getSeats()-1);
-                                    Users.simpleUsers[i].setCharge(Users.simpleUsers[i].getCharge()-Flights.flight[j].getPrice());
-
-
-                                    Ticket ticket = new Ticket(flightID, origin, destination, date, time, price, passangername, uniqTicketID);
-                                    Users.simpleUsers[i].setTicket(ticket);
-                                    System.out.println("booked seccessfully!");
-                                }
-                                else if (Users.simpleUsers[i].getCharge()<Flights.flight[j].getPrice()){
-                                    System.out.println("Not enough charge!");
-                                }
-                                else if(Flights.flight[j].getSeats()<1)
-                                {
-                                    System.out.println("doesn't have any empty seats!");
-                                }
-                            }
-                        }
+                        bookTicket(Users.simpleUsers[i]);
                         break;
-
-
                     }
                     while(command.equals("4"))
                     {
-                        System.out.println("                                               .................................................................");
-                        System.out.println("                                                                           BOOKED TICKET                        ");
-                        System.out.println("                                               .................................................................");
-                        System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-22s |\n","FLiGHT ID","ORIGIN","DESTINATION","DATE","TIME","Price","TicketID");
-                        for(int j =0 ; j < Users.simpleUsers[i].k ; j++)
-                        {
-                            System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-22s |\n",Users.simpleUsers[i].userTicket[j].getFlightId(),Users.simpleUsers[i].userTicket[j].getOrigin(),Users.simpleUsers[i].userTicket[j].getDestination(),Users.simpleUsers[i].userTicket[j].getDate(),Users.simpleUsers[i].userTicket[j].getTime(),Users.simpleUsers[i].userTicket[j].getPrice(),Users.simpleUsers[i].userTicket[j].getTicketId());
-
-                            /*System.out.println(Users.simpleUsers[i].userTicket[j].getTicketId());
-                            System.out.println(Users.simpleUsers[i].userTicket[j].getFlightId());
-                            System.out.println(Users.simpleUsers[i].userTicket[j].getPassangerName());*/
-                        }
+                        showBookedTicket(Users.simpleUsers[i]);
                         break;
                     }
 
-                    while(command.equals("5"))//Ticket cancelation
+                    while(command.equals("5"))//Ticket cancellation
                     {
-                        String flightID = input.next();
-                        for(int j =0 ; j < Users.simpleUsers[i].k ; j++)
-                        {
-                            if(Users.simpleUsers[i].userTicket[j].getFlightId().equals(flightID))
-                            {
-                                Users.simpleUsers[i].setCharge(Users.simpleUsers[i].getCharge()+Users.simpleUsers[i].userTicket[j].getPrice());
-                                for(int h = 0 ; h < Flights.n ; h++)
-                                {
-                                    if(Flights.flight[h].getFlightID().equals(Users.simpleUsers[i].userTicket[j].getFlightId()))
-                                    {
-                                        Flights.flight[h].setSeats(Flights.flight[h].getSeats()+1);
-                                    }
-                                }
-                                if(Users.simpleUsers[i].k >1) {
-                                    for (int l = j + 1; l < Users.simpleUsers[i].k; l++) {
-                                        Users.simpleUsers[i].userTicket[l - 1] = Users.simpleUsers[i].userTicket[l];
-                                        Users.simpleUsers[i].k--;
-                                    }
-                                }
-                                else {
-                                    Users.simpleUsers[i].k=0;
-                                }
-                                System.out.println("Ticket canceled successfully!");
-                                break;
-                            }
-                            else {
-                                System.out.println(Users.simpleUsers[i].userTicket[j].getTicketId());
-                            }
-                        }
+                        ticketCancellation(Users.simpleUsers[i]);
                         break;
                     }
 
                     while (command.equals("6"))//add charge menu
                     {
-                        ShowFunction.showaddchargemenu(Users.simpleUsers[i]);
+                        ShowFunction.showAddChargeMenu(Users.simpleUsers[i]);
                         break;
                     }
                     if(command.equals("0"))
                     {
                         break;
                     }
-
                 }
             }
             else if(user_name.equals("admin"))
             {
-
-
                 while(user_pass.equals("admin"))//admin log in menu
                 {
                     ShowFunction.adminMenuShow();
@@ -219,8 +152,13 @@ public class ShowFunction {
     }
 
 
-    //**************************************************************************************
-    public static void showaddchargemenu(SimpleUser user)
+//**************************************************************************************
+
+    /**
+     * This function use for adding charge!
+     * @param user
+     */
+    public static void showAddChargeMenu(SimpleUser user)
     {
         Scanner input = new Scanner(System.in);
         System.out.println(".....................................................");
@@ -233,7 +171,11 @@ public class ShowFunction {
         System.out.println(".....................................................");
     }
 //******************************************************************************************
-    public static void changepassword(SimpleUser user)
+
+    /**
+     *Function to change password!
+     */
+    public static void changePassword(SimpleUser user)
     {
         Scanner input = new Scanner(System.in);
         System.out.println(".........................................................");
@@ -245,7 +187,11 @@ public class ShowFunction {
         System.out.println("Your password updated to '"+ user.getUserPass()+"'");
 
     }
-    //*******************************************************************************************
+//*******************************************************************************************
+
+    /**
+     * Function to add a flight info and make a new flight!
+     */
     public static void showAddFlight(){
         Scanner input = new Scanner(System.in);
         System.out.println("............................................................");
@@ -272,10 +218,14 @@ public class ShowFunction {
     }
 
 
-     //**********************************************************************************************
+//**********************************************************************************************
 
 
-    //*****************************************************************************************
+//*****************************************************************************************
+
+    /**
+     * function to print the flight schedule!
+     */
     public static void showFlightCharts(){
         System.out.println("                                              ..........................................................");
         System.out.println("                                                                   FLIGHT SCHEDULE                      ");
@@ -284,18 +234,15 @@ public class ShowFunction {
         System.out.println("...............................................................................................................................................");
         for(int i = 0; i < Flights.n ; i++){
             System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20d | %-6d |\n",Flights.flight[i].getFlightID(),Flights.flight[i].getOrigin(),Flights.flight[i].getDestination(),Flights.flight[i].getDate(),Flights.flight[i].getTime(),Flights.flight[i].getPrice(),Flights.flight[i].getSeats());
-            /*System.out.println(Flights.flight[i].getFlightID());
-            System.out.println(Flights.flight[i].getOrigin());
-            System.out.println(Flights.flight[i].getDestination());
-            System.out.println(Flights.flight[i].getDate());
-            System.out.println(Flights.flight[i].getTime());
-            System.out.println(Flights.flight[i].getPrice());
-            System.out.println(Flights.flight[i].getSeats());*/
             System.out.println("...............................................................................................................................................");
         }
     }
 
-    //**************************************************************************************************
+//**************************************************************************************************
+
+    /**
+     * function to change information of a flight!
+     */
     public static void showUpdateMenu(){
         Scanner input = new Scanner(System.in);
         System.out.println(".........................................................");
@@ -312,7 +259,7 @@ public class ShowFunction {
         {
             while(Flights.flight[i].getFlightID().equals(id))
             {
-                System.out.println("wich one you want to update?");
+                System.out.println("which one you want to update?");
                 System.out.println("1-origin");
                 System.out.println("2-destination");
                 System.out.println("3-date");
@@ -374,8 +321,11 @@ public class ShowFunction {
     }
 
 
-    //******************************************************************************************
+//******************************************************************************************
 
+    /**
+     * function to remove a flight from the schedule!
+     */
     public static void showRemoveFlight(){
         Scanner input = new Scanner(System.in);
         while(true) {
@@ -409,8 +359,12 @@ public class ShowFunction {
         }
     }
 
-    //*********************************************************************************************
+//*********************************************************************************************
 
+    /**
+     * function that get admin command and show him the scope that he want!
+     * @param command
+     */
     public static void adminSignInMenu(String command)
     {
         while (command.equals("1"))//add flight menu
@@ -435,6 +389,12 @@ public class ShowFunction {
         }
     }
 //*************************************************************************************************************
+
+    /**
+     * function that get an integer number and make random String number!
+     * @param l : The length of the String
+     * @return a random String !
+     */
     public static String uniqStringGenerator(int l)
     {
         String str1 = " ";
@@ -446,6 +406,120 @@ public class ShowFunction {
         }
         return str1;
     }
+
+//**********************************************************************************************************
+
+    /**
+     * function for booking a ticket!
+     * @param sample
+     */
+    public static void bookTicket(SimpleUser sample)
+    {
+        Scanner input = new Scanner(System.in);
+        System.out.println("....................................................................");
+        System.out.println("                            BOOKING TICKET                          ");
+        System.out.println("....................................................................");
+        for(int j =0;j<Flights.n;j++)
+        {
+            System.out.println("ID :"+Flights.flight[j].getFlightID());
+        }
+        System.out.println("please Enter the ID of flight you want to buy: ");
+        String flightId = input.next();
+        for(int j =0 ; j <= Flights.n -1 ;j++)
+        {
+            if(Flights.flight[j].getFlightID().equals(flightId))
+            {
+                if(sample.getCharge() >= Flights.flight[j].getPrice()&& Flights.flight[j].getSeats()>=1) {
+                    String flightID = Flights.flight[j].getFlightID();
+                    String origin = Flights.flight[j].getOrigin();
+                    String destination = Flights.flight[j].getDestination();
+                    String date = Flights.flight[j].getDate();
+                    String time = Flights.flight[j].getOrigin();
+                    int price = Flights.flight[j].getPrice();
+                    String passengerName = sample.getUsername();
+                    String uniqTicketID = uniqStringGenerator(20);
+                    Flights.flight[j].setSeats(Flights.flight[j].getSeats()-1);
+                    sample.setCharge(sample.getCharge()-Flights.flight[j].getPrice());
+
+
+                    Ticket ticket = new Ticket(flightID, origin, destination, date, time, price, passengerName, uniqTicketID);
+                    sample.setTicket(ticket);
+                    System.out.println("booked successfully!");
+                }
+                else if (sample.getCharge()<Flights.flight[j].getPrice()){
+                    System.out.println("Not enough charge!");
+                }
+                else if(Flights.flight[j].getSeats()<1)
+                {
+                    System.out.println("doesn't have any empty seats!");
+                }
+            }
+        }
+    }
+
+//****************************************************************************************************************************
+
+    /**
+     * function that shows the user booked Tickets!
+     * @param sample
+     */
+    public static void showBookedTicket(SimpleUser sample)
+    {
+        System.out.println("                                               .................................................................");
+        System.out.println("                                                                           BOOKED TICKET                        ");
+        System.out.println("                                               .................................................................");
+        System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-22s |\n","FLiGHT ID","ORIGIN","DESTINATION","DATE","TIME","Price","TicketID");
+        for(int j =0 ; j < sample.k ; j++)
+        {
+            System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-22s |\n",sample.userTicket[j].getFlightId(),sample.userTicket[j].getOrigin(),sample.userTicket[j].getDestination(),sample.userTicket[j].getDate(),sample.userTicket[j].getTime(),sample.userTicket[j].getPrice(),sample.userTicket[j].getTicketId());
+        }
+    }
+
+//***********************************************************************************************************************************************
+
+    /**
+     * Function that cancel a flight Ticket reservation!
+     * @param sample
+     */
+    public static void ticketCancellation(SimpleUser sample)
+    {
+        Scanner input = new Scanner(System.in);
+        String flightID = input.next();
+        for(int j =0 ; j < sample.k ; j++)
+        {
+            if(sample.userTicket[j].getFlightId().equals(flightID))
+            {
+                sample.setCharge(sample.getCharge()+sample.userTicket[j].getPrice());
+                for(int h = 0 ; h < Flights.n ; h++)
+                {
+                    if(Flights.flight[h].getFlightID().equals(sample.userTicket[j].getFlightId()))
+                    {
+                        Flights.flight[h].setSeats(Flights.flight[h].getSeats()+1);
+                    }
+                }
+                if(sample.k >1) {
+                    for (int l = j + 1; l < sample.k; l++) {
+                        sample.userTicket[l - 1] = sample.userTicket[l];
+                        sample.k--;
+                    }
+                }
+                else {
+                    sample.k=0;
+                }
+                System.out.println("Ticket canceled successfully!");
+                break;
+            }
+            else {
+                System.out.println(sample.userTicket[j].getTicketId());
+            }
+        }
+    }
+//***************************************************************************************************************************
+
+
+
+
+
 
 
 }

@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.lang.Thread;
 public class TextArt {
+
+    /**
+     * function use to show a "welcome" text in a special format for 1 second
+     */
     public static void welcome(){
         System.out.println("                █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█");
         System.out.println("                █░░╦─╦╔╗╦─╔╗╔╗╔╦╗╔╗░░█");
@@ -13,6 +17,10 @@ public class TextArt {
             throw new RuntimeException(e);
         }
     }
+//__________________________________________________________________________________________________________
+    /**
+     * this function clear the screen
+     */
     public static void cls() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
@@ -23,6 +31,9 @@ public class TextArt {
             }
         } catch (IOException | InterruptedException ex) {}
     }
+
+
+    //_____________________________________________________________________________________________________
     public static void showAirPlane() {
         System.out.println("┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼████");
         System.out.println("┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼█▒▒▒▒█");
@@ -51,7 +62,13 @@ public class TextArt {
         System.out.println("┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼██▒▒▒▒█");
         System.out.println("┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼████");
     }
+    //_______________________________________________________________________________________________________
 
+
+
+    /**
+     * this function show a short animation of a flight moving to left side!
+     */
     public static void animationplne() throws InterruptedException {
 
         System.out.println("┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼████");

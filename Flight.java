@@ -1,4 +1,7 @@
 public class Flight {
+    /**
+     * Flight features
+     */
     private String origin;
     private String destination;
     private String time;
@@ -9,6 +12,16 @@ public class Flight {
 
     //-------------------------------------------------------
 
+    /**
+     * constructor to make a flight
+     * @param flightID
+     * @param origin
+     * @param destination
+     * @param date
+     * @param time
+     * @param price
+     * @param seats
+     */
     public Flight(String flightID,String origin ,String destination ,String date,String time ,int price ,int seats)
     {
         this.flightID=flightID;
@@ -21,6 +34,11 @@ public class Flight {
     }
 
     //-------------------------------------------------------
+
+    /**
+     * Getter and setters
+     */
+
     public String getOrigin() {
         return origin;
     }

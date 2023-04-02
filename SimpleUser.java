@@ -1,17 +1,30 @@
 public class SimpleUser {
+    /**
+     * features
+     */
     private String userName;
     private String userPass;
     private int charge;
     private String name;
-    //----------------------------------------------
     public Ticket[] userTicket = new Ticket[10];
-    public int k;
+    public int k;//number of elements in the userTicket list
+
+    //__________________________________________________________
+
+    /**
+     * function to add new Ticket to list
+     * @param ticket
+     */
     public void setTicket(Ticket ticket)
     {
         this.userTicket[k] = ticket;
         k++;
     }
     //---------------------------------------------
+
+    /**
+     * constructors to make a simple user by its information
+     */
     public SimpleUser()
     {
         this.name = " ";
@@ -29,6 +42,9 @@ public class SimpleUser {
 
     //--------------------------------------------
 
+    /**
+     * Setters & Getters
+     */
     public String getUserName() {
         return userName;
     }

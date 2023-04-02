@@ -1,4 +1,7 @@
 public class Ticket {
+    /**
+     * feature
+     */
     private String flightId ;
     private String origin ;
     private String destination ;
@@ -9,6 +12,18 @@ public class Ticket {
     private String ticketId ;
 
     //--------------------------------------------------------------------------------constructor
+
+    /**
+     * constructor to make a new Ticket
+     * @param flightId
+     * @param origin
+     * @param destination
+     * @param date
+     * @param time
+     * @param price
+     * @param passangerName
+     * @param ticketId
+     */
     public Ticket(String flightId , String origin , String destination , String date , String time , int price , String passangerName , String ticketId)
     {
         this.flightId = flightId;
@@ -23,6 +38,10 @@ public class Ticket {
 
 
     //-------------------------------------------------------------------------------
+
+    /**
+     *Setters & Getters
+     */
     public String getFlightId() {
         return flightId;
     }

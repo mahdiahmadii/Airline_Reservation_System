@@ -20,9 +20,11 @@ public class Main {
         users.setAdmin(admin);
 
 
-        do {
 
-            //option menu
+        do {
+            /**
+             * option menu
+             */
             ShowFunction.optionMenu();
             String command = input.next();
 
@@ -42,8 +44,6 @@ public class Main {
             //----------------------------------------------
 
 
-
-
             /**
              * signIn section
              */
@@ -57,10 +57,6 @@ public class Main {
                 command="0";
             }
             //-------------------------------------------------
-
-
-
-
 
 
 
