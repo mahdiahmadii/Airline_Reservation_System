@@ -142,10 +142,10 @@ public class ShowFunction {
                         System.out.println("                                               .................................................................");
                         System.out.println("                                                                           BOOKED TICKET                        ");
                         System.out.println("                                               .................................................................");
-                        System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-6s |\n","FLiGHT ID","ORIGIN","DESTINATION","DATE","TIME","Price","TicketID");
+                        System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-22s |\n","FLiGHT ID","ORIGIN","DESTINATION","DATE","TIME","Price","TicketID");
                         for(int j =0 ; j < Users.simpleUsers[i].k ; j++)
                         {
-                            System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-6s |\n",Users.simpleUsers[i].userTicket[j].getFlightId(),Users.simpleUsers[i].userTicket[j].getOrigin(),Users.simpleUsers[i].userTicket[j].getDestination(),Users.simpleUsers[i].userTicket[j].getDate(),Users.simpleUsers[i].userTicket[j].getTime(),Users.simpleUsers[i].userTicket[j].getPrice(),Users.simpleUsers[i].userTicket[j].getTicketId());
+                            System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-22s |\n",Users.simpleUsers[i].userTicket[j].getFlightId(),Users.simpleUsers[i].userTicket[j].getOrigin(),Users.simpleUsers[i].userTicket[j].getDestination(),Users.simpleUsers[i].userTicket[j].getDate(),Users.simpleUsers[i].userTicket[j].getTime(),Users.simpleUsers[i].userTicket[j].getPrice(),Users.simpleUsers[i].userTicket[j].getTicketId());
 
                             /*System.out.println(Users.simpleUsers[i].userTicket[j].getTicketId());
                             System.out.println(Users.simpleUsers[i].userTicket[j].getFlightId());
@@ -154,9 +154,37 @@ public class ShowFunction {
                         break;
                     }
 
-                    while(command.equals("5"))
+                    while(command.equals("5"))//Ticket cancelation
                     {
-                        //cancel ticket
+                        String flightID = input.next();
+                        for(int j =0 ; j < Users.simpleUsers[i].k ; j++)
+                        {
+                            if(Users.simpleUsers[i].userTicket[j].getFlightId().equals(flightID))
+                            {
+                                Users.simpleUsers[i].setCharge(Users.simpleUsers[i].getCharge()+Users.simpleUsers[i].userTicket[j].getPrice());
+                                for(int h = 0 ; h < Flights.n ; h++)
+                                {
+                                    if(Flights.flight[h].getFlightID().equals(Users.simpleUsers[i].userTicket[j].getFlightId()))
+                                    {
+                                        Flights.flight[h].setSeats(Flights.flight[h].getSeats()+1);
+                                    }
+                                }
+                                if(Users.simpleUsers[i].k >1) {
+                                    for (int l = j + 1; l < Users.simpleUsers[i].k; l++) {
+                                        Users.simpleUsers[i].userTicket[l - 1] = Users.simpleUsers[i].userTicket[l];
+                                        Users.simpleUsers[i].k--;
+                                    }
+                                }
+                                else {
+                                    Users.simpleUsers[i].k=0;
+                                }
+                                System.out.println("Ticket canceled successfully!");
+                                break;
+                            }
+                            else {
+                                System.out.println(Users.simpleUsers[i].userTicket[j].getTicketId());
+                            }
+                        }
                         break;
                     }
 
