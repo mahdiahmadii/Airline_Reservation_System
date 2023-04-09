@@ -306,9 +306,10 @@ public class ShowFunction {
         for(int i = 0; i < Flights.n ; i++){
             System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20d | %-6d |\n",Flights.flight[i].getFlightID(),Flights.flight[i].getOrigin(),Flights.flight[i].getDestination(),Flights.flight[i].getDate(),Flights.flight[i].getTime(),Flights.flight[i].getPrice(),Flights.flight[i].getSeats());
             System.out.println("...............................................................................................................................................");
-            System.out.println("Press Enter to continue...");
-            input.nextLine();
+
         }
+        System.out.println("Press Enter to continue...");
+        input.nextLine();
     }
 
 //**************************************************************************************************
@@ -637,6 +638,7 @@ public class ShowFunction {
         int t = 0;
         while(t==0){
             Scanner input = new Scanner(System.in);
+            showFlightCharts();
             System.out.println("...........................................................................");
             System.out.println("                 input the feature you want to filter with:                ");
             System.out.println("...........................................................................");
@@ -724,8 +726,10 @@ public class ShowFunction {
                 }
                 break;
             }
+            System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-6s |\n","FLiGHT ID","ORIGIN","DESTINATION","DATE","TIME","price","SEAT");
+            System.out.println(".........................................................................................................................................................");
             for(int j = 0 ; j < Filteredflight.label ; j++) {
-                System.out.println(Filteredflight.filterFlights[j].getFlightID());
+                System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20d | %-6d |\n",Filteredflight.filterFlights[j].getFlightID(),Filteredflight.filterFlights[j].getOrigin(),Filteredflight.filterFlights[j].getDestination(),Filteredflight.filterFlights[j].getDate(),Filteredflight.filterFlights[j].getTime(),Filteredflight.filterFlights[j].getPrice(),Filteredflight.filterFlights[j].getSeats());
             }
             System.out.println("-------------------------------------------------------");
 
@@ -733,12 +737,13 @@ public class ShowFunction {
             if(command.equals("0"))
             {
                 t=2;
+                Filteredflight.label=0;
             }
         }
         while(t==1){
             Scanner input = new Scanner(System.in);
             System.out.println("...........................................................................");
-            System.out.println("                 input the feature you want to filter with:                ");
+            System.out.println("                 choose the next feature you want to search:               ");
             System.out.println("...........................................................................");
             System.out.println("                              1-FlightID                                   ");
             System.out.println("                               2-Origin                                    ");
@@ -765,6 +770,7 @@ public class ShowFunction {
                 break;
             }
             while (command.equals("2")) {
+                System.out.print("Origin: ");
                 String filtered = input.next();
 
                 for (int j = 0; j<Filteredflight.label; j++) {
@@ -779,6 +785,7 @@ public class ShowFunction {
                 break;
             }
             while (command.equals("3")) {
+                System.out.print("Destination: ");
                 String filtered = input.next();
 
                 for (int j = 0; j<Filteredflight.label; j++) {
@@ -793,6 +800,7 @@ public class ShowFunction {
                 break;
             }
             while (command.equals("5")) {
+                System.out.print("Date: ");
                 String filtered = input.next();
 
                 for (int j = 0; j<Filteredflight.label; j++) {
@@ -807,6 +815,7 @@ public class ShowFunction {
                 break;
             }
             while (command.equals("6")) {
+                System.out.print("Time: ");
                 String filtered = input.next();
 
                 for (int j = 0; j<Filteredflight.label; j++) {
@@ -821,6 +830,7 @@ public class ShowFunction {
                 break;
             }
             while (command.equals("4")) {
+                System.out.print("price: ");
                 int filtered = input.nextInt();
 
                 for (int j = 0; j<Filteredflight.label; j++) {
@@ -834,15 +844,27 @@ public class ShowFunction {
                 }
                 break;
             }
-            System.out.println(Filteredflight.label);
+
+
+            System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-6s |\n","FLiGHT ID","ORIGIN","DESTINATION","DATE","TIME","price","SEAT");
+            System.out.println(".........................................................................................................................................................");
             for(int j = 0 ; j < Filteredflight.label ; j++) {
-                System.out.println(Filteredflight.filterFlights[j].getFlightID());
+                System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20d | %-6d |\n", Filteredflight.filterFlights[j].getFlightID(), Filteredflight.filterFlights[j].getOrigin(), Filteredflight.filterFlights[j].getDestination(), Filteredflight.filterFlights[j].getDate(), Filteredflight.filterFlights[j].getTime(), Filteredflight.filterFlights[j].getPrice(), Filteredflight.filterFlights[j].getSeats());
+                System.out.println(".........................................................................................................................................................");
             }
-            if(command.equals("0"))
+
+
+                if(command.equals("0"))
             {
                 Filteredflight.label = 0;
                 break ;
             }
+
+
+
+
+
+
         }
     }
 }
