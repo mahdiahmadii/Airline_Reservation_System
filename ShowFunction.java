@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.Random;
 import java.lang.Thread;
@@ -139,8 +140,8 @@ public class ShowFunction {
                     }
                     while(command.equals("2"))
                     {
-                        showFlightCharts();
-                        //to be continued...
+
+                        filteringTheFlights();
                         break;
                     }
                     while(command.equals("3"))
@@ -295,6 +296,7 @@ public class ShowFunction {
      * function to print the flight schedule!
      */
     public static void showFlightCharts(){
+        Scanner input = new Scanner(System.in);
         TextArt.cls();
         System.out.println("                                            "+"__________________________________________________________");
         System.out.println("                                            "+ColorFullTextsAndBackground.PURPLE_BOLD+"                     FLIGHT SCHEDULE                      ");
@@ -304,6 +306,8 @@ public class ShowFunction {
         for(int i = 0; i < Flights.n ; i++){
             System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20d | %-6d |\n",Flights.flight[i].getFlightID(),Flights.flight[i].getOrigin(),Flights.flight[i].getDestination(),Flights.flight[i].getDate(),Flights.flight[i].getTime(),Flights.flight[i].getPrice(),Flights.flight[i].getSeats());
             System.out.println("...............................................................................................................................................");
+            System.out.println("Press Enter to continue...");
+            input.nextLine();
         }
     }
 
@@ -627,10 +631,218 @@ public class ShowFunction {
     }
 //***************************************************************************************************************************
 
+    public static void filteringTheFlights()
+    {
+        Filteredflight filterchart = new Filteredflight();
+        int t = 0;
+        while(t==0){
+            Scanner input = new Scanner(System.in);
+            System.out.println("...........................................................................");
+            System.out.println("                 input the feature you want to filter with:                ");
+            System.out.println("...........................................................................");
+            System.out.println("                              1-FlightID                                   ");
+            System.out.println("                               2-Origin                                    ");
+            System.out.println("                             3-Destination                                 ");
+            System.out.println("                                4-Price                                    ");
+            System.out.println("                                5-Date                                     ");
+            System.out.println("                                6-Time                                     ");
+            System.out.println("                                0-Exit                                     ");
+            System.out.println("...........................................................................");
 
+            String command = input.next();
+            while (command.equals("1")) {
+                System.out.print("Search in FlightID: ");
+                String filtered = input.next();
 
+                for (int j = 0; j < Flights.n; j++) {
+                    if (Flights.flight[j].getFlightID().contains(filtered)) {
+                        Filteredflight.filterFlights[Filteredflight.label] = Flights.flight[j];
+                        Filteredflight.label++;
+                    }
+                }
+                break;
+            }
+            while (command.equals("2")) {
+                System.out.print("Search in Origin: ");
+                String filtered = input.next();
+                for (int j = 0; j < Flights.n; j++) {
+                    if(Flights.flight[j].getOrigin().contains(filtered))
+                    {
+                        Filteredflight.filterFlights[Filteredflight.label]= Flights.flight[j];
+                        Filteredflight.label++;
+                    }
+                }
+                break;
+            }
 
+            while (command.equals("3")) {
+                System.out.print("Search in Destination: ");
+                String filtered = input.next();
 
+                for (int j = 0; j < Flights.n; j++) {
+                    if (Flights.flight[j].getDestination().contains(filtered)) {
+                        Filteredflight.filterFlights[Filteredflight.label] = Flights.flight[j];
+                        Filteredflight.label++;
+                    }
+                }
+                break;
+            }
+            while (command.equals("5")) {
+                System.out.println("Search in Date : ");
+                String filtered = input.next();
 
+                for (int j = 0; j < Flights.n; j++) {
+                    if (Flights.flight[j].getDate().contains(filtered)) {
+                        Filteredflight.filterFlights[Filteredflight.label] = Flights.flight[j];
+                        Filteredflight.label++;
+                    }
+                }
+                break;
+            }
+            while (command.equals("6")) {
+                System.out.println("Search in Time : ");
+                String filtered = input.next();
 
+                for (int j = 0; j < Flights.n; j++) {
+                    if (Flights.flight[j].getTime().contains(filtered)) {
+                        Filteredflight.filterFlights[Filteredflight.label] = Flights.flight[j];
+                        Filteredflight.label++;
+                    }
+                }
+                break;
+            }
+            while(command.equals("4")){
+                System.out.print("Search in Price : ");
+                int filtered = input.nextInt();
+                for(int j =0 ; j < Flights.n ; j++)
+                {
+                    if (Flights.flight[j].getPrice()<filtered)
+                    {
+                        Filteredflight.filterFlights[Filteredflight.label] = Flights.flight[j];
+                        Filteredflight.label++;
+                    }
+                }
+                break;
+            }
+            for(int j = 0 ; j < Filteredflight.label ; j++) {
+                System.out.println(Filteredflight.filterFlights[j].getFlightID());
+            }
+            System.out.println("-------------------------------------------------------");
+
+            t=1;
+            if(command.equals("0"))
+            {
+                t=2;
+            }
+        }
+        while(t==1){
+            Scanner input = new Scanner(System.in);
+            System.out.println("...........................................................................");
+            System.out.println("                 input the feature you want to filter with:                ");
+            System.out.println("...........................................................................");
+            System.out.println("                              1-FlightID                                   ");
+            System.out.println("                               2-Origin                                    ");
+            System.out.println("                             3-Destination                                 ");
+            System.out.println("                                4-Price                                    ");
+            System.out.println("                                5-Date                                     ");
+            System.out.println("                                6-Time                                     ");
+            System.out.println("                                0-Exit                                     ");
+            System.out.println("...........................................................................");
+            String command = input.next();
+            while (command.equals("1")) {
+                System.out.print("flightID :");
+                String filtered = input.next();
+                for (int j = 0; j<Filteredflight.label; j++) {
+                    if (!Filteredflight.filterFlights[j].getFlightID().contains(filtered)) {
+                        System.out.println("h");
+                        for(int l = j ; l <= Filteredflight.label ; l++)
+                        {
+                            Filteredflight.filterFlights[l]=Filteredflight.filterFlights[l+1];
+                            Filteredflight.label--;
+                        }
+                    }
+                }
+                break;
+            }
+            while (command.equals("2")) {
+                String filtered = input.next();
+
+                for (int j = 0; j<Filteredflight.label; j++) {
+                    if (!Filteredflight.filterFlights[j].getOrigin().contains(filtered)) {
+                        for(int l = j ; l <= Filteredflight.label ; l++)
+                        {
+                            Filteredflight.filterFlights[l]=Filteredflight.filterFlights[l+1];
+                            Filteredflight.label--;
+                        }
+                    }
+                }
+                break;
+            }
+            while (command.equals("3")) {
+                String filtered = input.next();
+
+                for (int j = 0; j<Filteredflight.label; j++) {
+                    if (!Filteredflight.filterFlights[j].getDestination().contains(filtered)) {
+                        for(int l = j ; l <= Filteredflight.label ; l++)
+                        {
+                            Filteredflight.filterFlights[l]=Filteredflight.filterFlights[l+1];
+                            Filteredflight.label--;
+                        }
+                    }
+                }
+                break;
+            }
+            while (command.equals("5")) {
+                String filtered = input.next();
+
+                for (int j = 0; j<Filteredflight.label; j++) {
+                    if (!Filteredflight.filterFlights[j].getDate().contains(filtered)) {
+                        for(int l = j ; l <= Filteredflight.label ; l++)
+                        {
+                            Filteredflight.filterFlights[l]=Filteredflight.filterFlights[l+1];
+                            Filteredflight.label--;
+                        }
+                    }
+                }
+                break;
+            }
+            while (command.equals("6")) {
+                String filtered = input.next();
+
+                for (int j = 0; j<Filteredflight.label; j++) {
+                    if (!Filteredflight.filterFlights[j].getTime().contains(filtered)) {
+                        for(int l = j ; l <= Filteredflight.label ; l++)
+                        {
+                            Filteredflight.filterFlights[l]=Filteredflight.filterFlights[l+1];
+                            Filteredflight.label--;
+                        }
+                    }
+                }
+                break;
+            }
+            while (command.equals("4")) {
+                int filtered = input.nextInt();
+
+                for (int j = 0; j<Filteredflight.label; j++) {
+                    if (Filteredflight.filterFlights[j].getPrice() > filtered) {
+                        for(int l = j ; l <= Filteredflight.label ; l++)
+                        {
+                            Filteredflight.filterFlights[l]=Filteredflight.filterFlights[l+1];
+                            Filteredflight.label--;
+                        }
+                    }
+                }
+                break;
+            }
+            System.out.println(Filteredflight.label);
+            for(int j = 0 ; j < Filteredflight.label ; j++) {
+                System.out.println(Filteredflight.filterFlights[j].getFlightID());
+            }
+            if(command.equals("0"))
+            {
+                Filteredflight.label = 0;
+                break ;
+            }
+        }
+    }
 }
