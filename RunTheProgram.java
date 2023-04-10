@@ -42,10 +42,10 @@ public class RunTheProgram {
 
 
         System.out.print(ColorFullTextsAndBackground.CYAN);
-       // TextArt.animationplne();
+        TextArt.animationplne();
         TextArt.cls();
         System.out.print(ColorFullTextsAndBackground.YELLOW);
-        //TextArt.welcome();
+        TextArt.welcome();
         TextArt.cls();
         System.out.print(ColorFullTextsAndBackground.RESET);
         do {
