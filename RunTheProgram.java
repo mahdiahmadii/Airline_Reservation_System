@@ -6,10 +6,17 @@ public class RunTheProgram {
         Users users = new Users();
         Admin admin = new Admin();
 
+
+
+
+
         //as author of this program I am right to have an account :)))))))))))
         SimpleUser firstUser = new SimpleUser("mahdi","ahmadi","mahdiahmadi");
         Users.setSimpleUser(firstUser);
         //warning: if you remove my personal account you'll get some unexpected exception and program won't work any more! :))))))))))))))))
+
+
+
 
         //I add two flight information as sample to my flights chart
         Flight sample1 = new Flight("wx-12","Yazd","Tehran","1402/02/10","22:20",700000,51);
@@ -21,16 +28,24 @@ public class RunTheProgram {
         Flight sample4 = new Flight("wx-15","Tabriz","Yazd","1402/02/013","08:20",800000,91);
         Flights.setFlight(sample4);
         Flight sample5 = new Flight("wx-16","Isfahan","Yazd","1402/02/10","10:30",550000,44);
-        Flights.setFlight(sample2);
+        Flights.setFlight(sample5);
+
+
+
 
         //set the admin
         users.setAdmin(admin);
 
+
+
+
+
+
         System.out.print(ColorFullTextsAndBackground.CYAN);
-        TextArt.animationplne();
+       // TextArt.animationplne();
         TextArt.cls();
         System.out.print(ColorFullTextsAndBackground.YELLOW);
-        TextArt.welcome();
+        //TextArt.welcome();
         TextArt.cls();
         System.out.print(ColorFullTextsAndBackground.RESET);
         do {
@@ -69,6 +84,8 @@ public class RunTheProgram {
                 command="0";
             }
             //-------------------------------------------------
+
+
 
 
 

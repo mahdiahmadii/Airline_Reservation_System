@@ -14,14 +14,14 @@ public class ShowFunction {
         TextArt.showAirlineReservationSystem();
         //System.out.println("               Airline Reservation System                  ");
         System.out.print(ColorFullTextsAndBackground.RESET);
-        System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+        System.out.println(ColorFullTextsAndBackground.Backgroundcolor1+"::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
         System.out.print(ColorFullTextsAndBackground.BLUE_BOLD);
-        System.out.println("                      <1> SIGN IN                          ");
+        System.out.println("                                              <1> SIGN IN                          ");
         System.out.print(ColorFullTextsAndBackground.RED_BOLD);
-        System.out.println("                      <2> SIGN UP                          ");
+        System.out.println("                                              <2> SIGN UP                          ");
         System.out.print(ColorFullTextsAndBackground.RESET);
-        System.out.println("..............................................................");
-        System.out.print(">>");
+        System.out.println("...................................................................................................................................");
+        System.out.print(">>"+ColorFullTextsAndBackground.RESET);
     }
 //*********************************************************************************************
 
@@ -29,29 +29,65 @@ public class ShowFunction {
      * this function use for sign up !
      */
     public static void signUpSection(){
-        TextArt.cls();
-        Scanner input = new Scanner(System.in);
-        System.out.println("..............................................................");
-        System.out.print(ColorFullTextsAndBackground.RED_BOLD);
-        System.out.println("                            SIGN UP                           ");
-        System.out.print(ColorFullTextsAndBackground.RESET);
-        System.out.println("..............................................................");
-        System.out.print("            input your "+ColorFullTextsAndBackground.CYAN_BOLD+"username:"+ColorFullTextsAndBackground.RESET);
-        String user_name = input.next();
-        System.out.print("            input your "+ColorFullTextsAndBackground.CYAN_BOLD+"password:"+ColorFullTextsAndBackground.RESET);
-        String user_pass = input.next();
-        System.out.print("            input your "+ColorFullTextsAndBackground.CYAN_BOLD+"name:"+ColorFullTextsAndBackground.RESET);
-        String name_of_user = input.next();
 
-        SimpleUser simpleUser = new SimpleUser(user_name, user_pass, name_of_user);
-        Users.setSimpleUser(simpleUser);
-        System.out.println("..............................................................");
-        System.out.print(ColorFullTextsAndBackground.GREEN);
-        System.out.println("                    signed up successfully!                   ");
-        System.out.print(ColorFullTextsAndBackground.RESET);
-        System.out.println("..............................................................");
+        while(true) {
+            TextArt.cls();
+            boolean valid = true;
+            Scanner input = new Scanner(System.in);
+            System.out.println("..............................................................");
+            System.out.print(ColorFullTextsAndBackground.RED_BOLD);
+            System.out.println("                            SIGN UP                           ");
+            System.out.print(ColorFullTextsAndBackground.RESET);
+            System.out.println("..............................................................");
+            System.out.print("            input your " + ColorFullTextsAndBackground.CYAN_BOLD + "username:" + ColorFullTextsAndBackground.RESET);
+            String user_name = input.next();
+            if (user_name.length()<3)
+            {
+                System.out.println(ColorFullTextsAndBackground.RED_BOLD+"invalid username!!!"+ColorFullTextsAndBackground.RESET);
+                System.out.println("your username should be at least 3 character. ");
+                valid = false;
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            for(int i = 0 ; i < Users.n ; i++) {
+                if (user_name.equals(Users.simpleUsers[i].getUserName()))
+                {
+                    System.out.println(ColorFullTextsAndBackground.RED_BOLD+"this username already exist! "+ColorFullTextsAndBackground.RESET);
+                    System.out.println("please try again >>");
+                    valid = false;
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            if(valid==false)
+            {
+                continue;
+            }
+            System.out.print("            input your " + ColorFullTextsAndBackground.CYAN_BOLD + "password:" + ColorFullTextsAndBackground.RESET);
+            String user_pass = input.next();
+
+            System.out.print("            input your " + ColorFullTextsAndBackground.CYAN_BOLD + "name:" + ColorFullTextsAndBackground.RESET);
+            String name_of_user = input.next();
+
+
+            SimpleUser simpleUser = new SimpleUser(user_name, user_pass, name_of_user);
+            Users.setSimpleUser(simpleUser);
+            System.out.println("..............................................................");
+            System.out.print(ColorFullTextsAndBackground.GREEN);
+            System.out.println("                    signed up successfully!                   ");
+            System.out.print(ColorFullTextsAndBackground.RESET);
+            System.out.println("..............................................................");
+            break;
+
+        }
         try {
-            Thread.sleep(1500);
+            Thread.sleep(2300);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -69,15 +105,15 @@ public class ShowFunction {
         System.out.print(ColorFullTextsAndBackground.RESET);
         System.out.println("..............................................................");
         System.out.print(ColorFullTextsAndBackground.YELLOW);
-        System.out.println("                           1-Add                              ");
+        System.out.println("                          <1>Add                              ");
         System.out.print(ColorFullTextsAndBackground.CYAN);
-        System.out.println("                          2-Update                            ");
+        System.out.println("                         <2>Update                            ");
         System.out.print(ColorFullTextsAndBackground.RED);
-        System.out.println("                          3-remove                            ");
+        System.out.println("                         <3>remove                            ");
         System.out.print(ColorFullTextsAndBackground.PURPLE);
-        System.out.println("                       4-FlightSchedule                       ");
+        System.out.println("                      <4>FlightSchedule                       ");
         System.out.print(ColorFullTextsAndBackground.RESET);
-        System.out.println("                          0-LogOut                            ");
+        System.out.println("                         <0>LogOut                            ");
         System.out.println("..............................................................");
         System.out.print(">>");
     }
@@ -96,19 +132,19 @@ public class ShowFunction {
         System.out.print(ColorFullTextsAndBackground.RESET);
         System.out.println("..............................................................");
         System.out.print(ColorFullTextsAndBackground.YELLOW);
-        System.out.println("                      1-Change Password                       ");
+        System.out.println("                     <1>Change Password                       ");
         System.out.print(ColorFullTextsAndBackground.CYAN);
-        System.out.println("                    2-Search Flight Ticket                    ");
+        System.out.println("                   <2>Search Flight Ticket                    ");
         System.out.print(ColorFullTextsAndBackground.PURPLE);
-        System.out.println("                       3-Booking Ticket                       ");
+        System.out.println("                      <3>Booking Ticket                       ");
         System.out.print(ColorFullTextsAndBackground.RED);
-        System.out.println("                       4-Booked Tickets                       ");
+        System.out.println("                      <4>Booked Tickets                       ");
         System.out.print(ColorFullTextsAndBackground.BLUE);
-        System.out.println("                     5-Ticket Cancellation                    ");
+        System.out.println("                    <5>Ticket Cancellation                    ");
         System.out.print(ColorFullTextsAndBackground.GREEN);
-        System.out.println("                         6-Add charge                         ");
+        System.out.println("                        <6>Add charge                         ");
         System.out.print(ColorFullTextsAndBackground.RESET);
-        System.out.println("                          0-Sign Out                          ");
+        System.out.println("                         <0>Sign Out                          ");
         System.out.println("..............................................................");
         System.out.print(">>");
 
@@ -201,20 +237,77 @@ public class ShowFunction {
     {
         TextArt.cls();
         Scanner input = new Scanner(System.in);
+
         System.out.println("..............................................................");
         System.out.print(ColorFullTextsAndBackground.GREEN_BOLD);
         System.out.println("                         ADD CHARGE MENU                      ");
         System.out.print(ColorFullTextsAndBackground.RESET);
         System.out.println("..............................................................");
-        System.out.println("your current charge is "+ColorFullTextsAndBackground.WHITE_BOLD+ user.getCharge()+ColorFullTextsAndBackground.RESET+" toman!");
-        System.out.print("please enter the value you want to charge :");
-        user.setCharge((user.getCharge()+input.nextInt()));
-        System.out.println("..............................................................");
-        System.out.println("The operation done!");
-        System.out.println("\nyour current charge is "+ColorFullTextsAndBackground.WHITE_BOLD+ user.getCharge()+ColorFullTextsAndBackground.RESET+" toman");
-        System.out.println("..............................................................");
+        System.out.println("your current charge is " + ColorFullTextsAndBackground.WHITE_BOLD + user.getCharge() + ColorFullTextsAndBackground.RESET + " toman!");
+        System.out.print("press enter to add charge... ");
+        input.nextLine();
+        while(true) {
+            TextArt.cls();
+            TextArt.paypal();
+            System.out.print("please enter the value you want to charge :");
+            System.out.print(">> ");
+            user.setCharge((user.getCharge() + input.nextInt()));
+            System.out.print("Card number :");
+            String cardNumber = input.next();
+            System.out.print("Expiration Date: ");
+            String expiration = input.next();
+            System.out.print("CSC: ");
+            String CSC = input.next();
+            if(cardNumber.length()==16 )
+            {
+                if(expiration.contains("/")){
+                    if(CSC.length()>=4)
+                    {
+                        System.out.print("Connecting to payment gateway...");
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    }
+                    else {
+                        System.out.println(ColorFullTextsAndBackground.RED+"invalid CSC!"+ColorFullTextsAndBackground.RESET);
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        continue;
+                    }
+                }
+                else{
+                    System.out.println(ColorFullTextsAndBackground.RED+"invalid expiration date!"+ColorFullTextsAndBackground.RESET);
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    continue;
+                }
+            }
+            else {
+                System.out.println(ColorFullTextsAndBackground.RED+"card number should be 16 character!"+ColorFullTextsAndBackground.RESET);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                continue;
+            }
+            System.out.println("..............................................................");
+            System.out.println(ColorFullTextsAndBackground.GREEN_BOLD+"The operation done!"+ColorFullTextsAndBackground.RESET);
+            System.out.println("\nyour current charge is " + ColorFullTextsAndBackground.WHITE_BOLD + user.getCharge() + ColorFullTextsAndBackground.RESET + " toman");
+            System.out.println("..............................................................");
+            break;
+        }
         try {
-            Thread.sleep(1500);
+            Thread.sleep(3500);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -229,15 +322,15 @@ public class ShowFunction {
         TextArt.cls();
         Scanner input = new Scanner(System.in);
         System.out.println("..............................................................");
-        System.out.println("                        CHANGE PASSWORD!                      ");
+        System.out.println(ColorFullTextsAndBackground.YELLOW+"                        CHANGE PASSWORD!                      "+ColorFullTextsAndBackground.RESET);
         System.out.println("..............................................................");
-        System.out.println(" Your current password is :" + user.getUserPass());
+        System.out.println(ColorFullTextsAndBackground.YELLOW+" Your current password is : '"+ColorFullTextsAndBackground.BLUE_UNDERLINED + user.getUserPass()+ColorFullTextsAndBackground.RESET+"'");
         System.out.print(" Enter your new password : ");
         user.setUserPass(input.next());
-        System.out.println("Your password updated to '"+ user.getUserPass()+"'");
+        System.out.println("Your password updated to '"+ColorFullTextsAndBackground.BLUE_UNDERLINED +user.getUserPass()+ColorFullTextsAndBackground.RESET+"'");
         System.out.println("..............................................................");
         try {
-            Thread.sleep(1500);
+            Thread.sleep(2300);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -250,36 +343,61 @@ public class ShowFunction {
      * Function to add a flight info and make a new flight!
      */
     public static void showAddFlight(){
-        TextArt.cls();
+
         Scanner input = new Scanner(System.in);
-        System.out.println("..............................................................");
-        System.out.print(ColorFullTextsAndBackground.YELLOW_BOLD);
-        System.out.println("                         ADD FLIGHT                           ");
-        System.out.print(ColorFullTextsAndBackground.RESET);
-        System.out.println("..............................................................");
-        System.out.print(ColorFullTextsAndBackground.PURPLE);
-        System.out.print("Enter flight ID :");
-        String Id = input.next();
-        System.out.print("Enter flight origin: ");
-        String origin = input.next();
-        System.out.print("Enter flight destination: ");
-        String destination = input.next();
-        System.out.print("Enter flight date: ");
-        String date = input.next();
-        System.out.print("Enter flight time: ");
-        String time = input.next();
-        System.out.print("Enter flight price: ");
-        int price = input.nextInt();
-        System.out.print("Enter flight seats: ");
-        int seats = input.nextInt();
+
+        while(true) {
+            TextArt.cls();
+            boolean valid=true;
+            System.out.println("..............................................................");
+            System.out.print(ColorFullTextsAndBackground.YELLOW_BOLD);
+            System.out.println("                         ADD FLIGHT                           ");
+            System.out.print(ColorFullTextsAndBackground.RESET);
+            System.out.println("..............................................................");
+            System.out.print(ColorFullTextsAndBackground.PURPLE);
+            System.out.print("Enter flight ID :");
+            String Id = input.next();
+            for(int i = 0 ; i<Flights.n ; i++)
+            {
+                if(Id.equals(Flights.flight[i].getFlightID()))
+                {
+                    System.out.println("This flight ID already exist!");
+                    System.out.println("Please change the ID and try again.");
+                    valid = false;
+                }
+
+            }
+            if(Id.length()<3){
+                System.out.println("invalid flight ID !");
+                valid = false;
+            }
+            if(valid==false)
+            {
+                continue;
+            }
+
+            System.out.print("Enter flight origin: ");
+            String origin = input.next();
+            System.out.print("Enter flight destination: ");
+            String destination = input.next();
+            System.out.print("Enter flight date: ");
+            String date = input.next();
+            System.out.print("Enter flight time: ");
+            String time = input.next();
+            System.out.print("Enter flight price: ");
+            int price = input.nextInt();
+            System.out.print("Enter flight seats: ");
+            int seats = input.nextInt();
 
 
-        Flight ticket = new Flight(Id,origin,destination,date,time,price,seats);
-        Flights.setFlight(ticket);
-        System.out.print(ColorFullTextsAndBackground.GREEN);
-        System.out.println("                           DONE!                              ");
-        System.out.println(ColorFullTextsAndBackground.RESET);
-        System.out.println("..............................................................");
+            Flight ticket = new Flight(Id, origin, destination, date, time, price, seats);
+            Flights.setFlight(ticket);
+            System.out.print(ColorFullTextsAndBackground.GREEN);
+            System.out.println("                           DONE!                              ");
+            System.out.println(ColorFullTextsAndBackground.RESET);
+            System.out.println("..............................................................");
+            break;
+        }
         try {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
@@ -305,7 +423,7 @@ public class ShowFunction {
         System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-6s |\n","FLiGHT ID","ORIGIN","DESTINATION","DATE","TIME","price","SEAT");
         System.out.println("...............................................................................................................................................");
         for(int i = 0; i < Flights.n ; i++){
-            System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20d | %-6d |\n",Flights.flight[i].getFlightID(),Flights.flight[i].getOrigin(),Flights.flight[i].getDestination(),Flights.flight[i].getDate(),Flights.flight[i].getTime(),Flights.flight[i].getPrice(),Flights.flight[i].getSeats());
+            System.out.printf("|"+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+ColorFullTextsAndBackground.CYAN+" %-20s "+ColorFullTextsAndBackground.RESET+"|"+ColorFullTextsAndBackground.GREEN+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-20s"+ColorFullTextsAndBackground.RESET+" |"+ColorFullTextsAndBackground.PURPLE+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-20s"+ColorFullTextsAndBackground.RESET+" |"+ColorFullTextsAndBackground.YELLOW+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-15s"+ColorFullTextsAndBackground.RESET+" | "+ColorFullTextsAndBackground.BLUE+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+"%-20s "+ColorFullTextsAndBackground.RESET+"| "+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+"%-20d "+ColorFullTextsAndBackground.RESET+"| "+ColorFullTextsAndBackground.RED+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+"%-6d "+ColorFullTextsAndBackground.RESET+"|\n",Flights.flight[i].getFlightID(),Flights.flight[i].getOrigin(),Flights.flight[i].getDestination(),Flights.flight[i].getDate(),Flights.flight[i].getTime(),Flights.flight[i].getPrice(),Flights.flight[i].getSeats());
             System.out.println("...............................................................................................................................................");
 
         }
@@ -320,15 +438,16 @@ public class ShowFunction {
      */
     public static void showUpdateMenu(){
         TextArt.cls();
+        showFlightCharts();
         Scanner input = new Scanner(System.in);
         System.out.println("..............................................................");
-        System.out.println("                          UPDATE MENU                         ");
-        System.out.println("..............................................................");
+        System.out.println(ColorFullTextsAndBackground.CYAN+"                          UPDATE MENU                         "+ColorFullTextsAndBackground.RESET);
+        System.out.println(".............................................................."+ColorFullTextsAndBackground.BLUE);
         for(int i =0;i<Flights.n;i++)
         {
             System.out.println("ID :"+Flights.flight[i].getFlightID());
         }
-        System.out.println("..............................................................");
+        System.out.println(ColorFullTextsAndBackground.RESET+"..............................................................");
         System.out.print("Enter the Id of flight you want to change:");
         String id = input.next();
         for(int i =0 ; i<Flights.n ; i++)
@@ -410,13 +529,13 @@ public class ShowFunction {
             TextArt.cls();
             ShowFunction.showFlightCharts();
             System.out.println("..............................................................");
-            System.out.println("                        REMOVE FLIGHT                         ");
-            System.out.println("..............................................................");
+            System.out.println(ColorFullTextsAndBackground.RED_BOLD+"                        REMOVE FLIGHT                         ");
+            System.out.println(ColorFullTextsAndBackground.RESET+".............................................................."+ColorFullTextsAndBackground.BLUE);
             for(int i =0;i<Flights.n;i++)
             {
                 System.out.println("ID :"+Flights.flight[i].getFlightID());
             }
-            System.out.print("Enter the FLight ID you want to remove or 0 to return back: ");
+            System.out.print(ColorFullTextsAndBackground.RESET+"Enter the FLight ID you want to remove or 0 to return back: ");
             String removedId = input.next();
             if(removedId.equals("0"))
             {
@@ -434,8 +553,8 @@ public class ShowFunction {
                         break;
                     }
                     else if (!Flights.flight[i].isAdminChangePermission()){
-                        System.out.println("unable to remove this flight because many users have already booked it!");
-                        System.out.println("press enter to continue...");
+                        System.out.println(ColorFullTextsAndBackground.RED_BOLD+"unable to remove this flight because many users have already booked it!");
+                        System.out.println(ColorFullTextsAndBackground.RESET+"press enter to continue...");
                         input.nextLine();
                         break;
                     }
@@ -511,17 +630,17 @@ public class ShowFunction {
     public static void bookTicket(SimpleUser sample)
     {
         Scanner input = new Scanner(System.in);
-        TextArt.cls();
+
         System.out.println("..............................................................");
         System.out.print(ColorFullTextsAndBackground.YELLOW_BOLD);
         System.out.println("                       BOOKING TICKET                         ");
-        System.out.println(ColorFullTextsAndBackground.RESET);
-        System.out.println("..............................................................");
+        System.out.print(ColorFullTextsAndBackground.RESET);
+        System.out.println(".............................................................."+ColorFullTextsAndBackground.CYAN);
         for(int j =0;j<Flights.n;j++)
         {
             System.out.println("ID :"+Flights.flight[j].getFlightID());
         }
-        System.out.println("please Enter the ID of flight you want to buy: ");
+        System.out.println(ColorFullTextsAndBackground.RESET+"please Enter the ID of flight you want to buy: ");
         String flightId = input.next();
         for(int j =0 ; j <= Flights.n -1 ;j++)
         {
@@ -543,7 +662,7 @@ public class ShowFunction {
 
                     Ticket ticket = new Ticket(flightID, origin, destination, date, time, price, passengerName, uniqTicketID);
                     sample.setTicket(ticket);
-                    System.out.println("booked successfully!");
+                    System.out.println(ColorFullTextsAndBackground.GREEN_BOLD+"booked successfully!"+ColorFullTextsAndBackground.RESET);
                     try {
                         Thread.sleep(1500);
                     } catch (InterruptedException e) {
@@ -585,15 +704,14 @@ public class ShowFunction {
         System.out.println("                                               "+ColorFullTextsAndBackground.RED+"                            BOOKED TICKET "+ColorFullTextsAndBackground.RESET+"                       ");
         System.out.println("                                               .................................................................");
         System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-22s |\n","FLiGHT ID","ORIGIN","DESTINATION","DATE","TIME","Price","TicketID");
+        System.out.println(".................................................................................................................................................");
         for(int j =0 ; j < sample.k ; j++)
         {
-            System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-22s |\n",sample.userTicket[j].getFlightId(),sample.userTicket[j].getOrigin(),sample.userTicket[j].getDestination(),sample.userTicket[j].getDate(),sample.userTicket[j].getTime(),sample.userTicket[j].getPrice(),sample.userTicket[j].getTicketId());
+            System.out.printf("|"+ColorFullTextsAndBackground.RED+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-20s "+ColorFullTextsAndBackground.RESET+"| "+ColorFullTextsAndBackground.CYAN+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+"%-20s "+ColorFullTextsAndBackground.RESET+"|"+ColorFullTextsAndBackground.PURPLE+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-20s "+ColorFullTextsAndBackground.RESET+"|"+ColorFullTextsAndBackground.BLUE+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-15s "+ColorFullTextsAndBackground.RESET+"| "+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+"%-20s"+ColorFullTextsAndBackground.RESET+" |"+ColorFullTextsAndBackground.BROWN+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-20s "+ColorFullTextsAndBackground.RESET+"| "+ColorFullTextsAndBackground.YELLOW+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+"%-22s"+ColorFullTextsAndBackground.RESET+" |\n",sample.userTicket[j].getFlightId(),sample.userTicket[j].getOrigin(),sample.userTicket[j].getDestination(),sample.userTicket[j].getDate(),sample.userTicket[j].getTime(),sample.userTicket[j].getPrice(),sample.userTicket[j].getTicketId());
+            System.out.println(".................................................................................................................................................");
         }
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        System.out.println("Press enter to continue...");
+        input.nextLine();
     }
 
 //***********************************************************************************************************************************************
@@ -634,7 +752,7 @@ public class ShowFunction {
                 else {
                     sample.k=0;
                 }
-                System.out.println("Ticket canceled successfully!");
+                System.out.println(ColorFullTextsAndBackground.GREEN_BOLD+"Ticket canceled successfully!"+ColorFullTextsAndBackground.RESET);
                 System.out.println("..............................................................");
                 try {
                     Thread.sleep(1500);
@@ -655,19 +773,9 @@ public class ShowFunction {
     {
         int t = 0;
         while(t==0){
+            TextArt.cls();
             Scanner input = new Scanner(System.in);
-            showFlightCharts();
-            System.out.println("...........................................................................");
-            System.out.println("                 input the feature you want to filter with:                ");
-            System.out.println("...........................................................................");
-            System.out.println("                              1-FlightID                                   ");
-            System.out.println("                               2-Origin                                    ");
-            System.out.println("                             3-Destination                                 ");
-            System.out.println("                                4-Price                                    ");
-            System.out.println("                                5-Date                                     ");
-            System.out.println("                                6-Time                                     ");
-            System.out.println("                                0-Exit                                     ");
-            System.out.println("...........................................................................");
+            printFilterFlightMenu();
 
             String command = input.next();
             while (command.equals("1")) {
@@ -747,9 +855,10 @@ public class ShowFunction {
             System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-6s |\n","FLiGHT ID","ORIGIN","DESTINATION","DATE","TIME","price","SEAT");
             System.out.println(".........................................................................................................................................................");
             for(int j = 0 ; j < Filteredflight.label ; j++) {
-                System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20d | %-6d |\n",Filteredflight.filterFlights[j].getFlightID(),Filteredflight.filterFlights[j].getOrigin(),Filteredflight.filterFlights[j].getDestination(),Filteredflight.filterFlights[j].getDate(),Filteredflight.filterFlights[j].getTime(),Filteredflight.filterFlights[j].getPrice(),Filteredflight.filterFlights[j].getSeats());
+                System.out.printf("| "+"%-20s "+"|"+ColorFullTextsAndBackground.CYAN+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-20s "+ColorFullTextsAndBackground.RESET+"|"+ColorFullTextsAndBackground.YELLOW+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-20s "+ColorFullTextsAndBackground.RESET+"| "+ColorFullTextsAndBackground.RED+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+"%-15s "+ColorFullTextsAndBackground.RESET+"|"+ColorFullTextsAndBackground.GREEN+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-20s "+ColorFullTextsAndBackground.RESET+"|"+ColorFullTextsAndBackground.PURPLE+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-20s "+ColorFullTextsAndBackground.RESET+"|"+ColorFullTextsAndBackground.BLUE+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-6s "+ColorFullTextsAndBackground.RESET+"|\n", Filteredflight.filterFlights[j].getFlightID(), Filteredflight.filterFlights[j].getOrigin(), Filteredflight.filterFlights[j].getDestination(), Filteredflight.filterFlights[j].getDate(), Filteredflight.filterFlights[j].getTime(), Filteredflight.filterFlights[j].getPrice(), Filteredflight.filterFlights[j].getSeats());
+                System.out.println(".........................................................................................................................................................");
             }
-            System.out.println("-------------------------------------------------------");
+
 
             t=1;
             if(command.equals("0"))
@@ -760,17 +869,7 @@ public class ShowFunction {
         }
         while(t==1){
             Scanner input = new Scanner(System.in);
-            System.out.println("...........................................................................");
-            System.out.println("                 choose the next feature you want to search:               ");
-            System.out.println("...........................................................................");
-            System.out.println("                              1-FlightID                                   ");
-            System.out.println("                               2-Origin                                    ");
-            System.out.println("                             3-Destination                                 ");
-            System.out.println("                                4-Price                                    ");
-            System.out.println("                                5-Date                                     ");
-            System.out.println("                                6-Time                                     ");
-            System.out.println("                                0-Exit                                     ");
-            System.out.println("...........................................................................");
+            printFilterFlightMenu2();
             String command = input.next();
             while (command.equals("1")) {
                 System.out.print("flightID :");
@@ -863,11 +962,11 @@ public class ShowFunction {
                 break;
             }
 
-
+//hahaha
             System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20s | %-6s |\n","FLiGHT ID","ORIGIN","DESTINATION","DATE","TIME","price","SEAT");
             System.out.println(".........................................................................................................................................................");
             for(int j = 0 ; j < Filteredflight.label ; j++) {
-                System.out.printf("| %-20s | %-20s | %-20s | %-15s | %-20s | %-20d | %-6d |\n", Filteredflight.filterFlights[j].getFlightID(), Filteredflight.filterFlights[j].getOrigin(), Filteredflight.filterFlights[j].getDestination(), Filteredflight.filterFlights[j].getDate(), Filteredflight.filterFlights[j].getTime(), Filteredflight.filterFlights[j].getPrice(), Filteredflight.filterFlights[j].getSeats());
+                System.out.printf("| "+"%-20s "+"|"+ColorFullTextsAndBackground.CYAN+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-20s "+ColorFullTextsAndBackground.RESET+"|"+ColorFullTextsAndBackground.YELLOW+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-20s "+ColorFullTextsAndBackground.RESET+"| "+ColorFullTextsAndBackground.RED+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+"%-15s "+ColorFullTextsAndBackground.RESET+"|"+ColorFullTextsAndBackground.GREEN+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-20s "+ColorFullTextsAndBackground.RESET+"|"+ColorFullTextsAndBackground.PURPLE+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-20s "+ColorFullTextsAndBackground.RESET+"|"+ColorFullTextsAndBackground.BLUE+ColorFullTextsAndBackground.BACKGROUND_COLOR_2+" %-6s "+ColorFullTextsAndBackground.RESET+"|\n", Filteredflight.filterFlights[j].getFlightID(), Filteredflight.filterFlights[j].getOrigin(), Filteredflight.filterFlights[j].getDestination(), Filteredflight.filterFlights[j].getDate(), Filteredflight.filterFlights[j].getTime(), Filteredflight.filterFlights[j].getPrice(), Filteredflight.filterFlights[j].getSeats());
                 System.out.println(".........................................................................................................................................................");
             }
 
@@ -884,5 +983,37 @@ public class ShowFunction {
 
 
         }
+        TextArt.cls();
+    }
+    //****************************************************************************************************************************
+    public static void printFilterFlightMenu()
+    {
+        showFlightCharts();
+        System.out.println("...........................................................................");
+        System.out.println(ColorFullTextsAndBackground.YELLOW_BOLD+"                 input the feature you want to filter with:                ");
+        System.out.println("...........................................................................");
+        System.out.println(ColorFullTextsAndBackground.CYAN+"                              1-FlightID                                   ");
+        System.out.println(ColorFullTextsAndBackground.RED+"                               2-Origin                                    ");
+        System.out.println(ColorFullTextsAndBackground.GREEN+"                             3-Destination                                 ");
+        System.out.println(ColorFullTextsAndBackground.PURPLE+"                                4-Price                                    ");
+        System.out.println(ColorFullTextsAndBackground.BROWN+"                                5-Date                                     ");
+        System.out.println(ColorFullTextsAndBackground.YELLOW+"                                6-Time                                     ");
+        System.out.println(ColorFullTextsAndBackground.RESET+"                                0-Exit                                     ");
+        System.out.println("...........................................................................");
+    }
+    //**************************************************************************************************************************
+    public static void printFilterFlightMenu2()
+    {
+        System.out.println("...........................................................................");
+        System.out.println(ColorFullTextsAndBackground.YELLOW_BOLD+"                 choose the next feature you want to search:               ");
+        System.out.println("...........................................................................");
+        System.out.println(ColorFullTextsAndBackground.CYAN+"                              1-FlightID                                   ");
+        System.out.println(ColorFullTextsAndBackground.RED+"                               2-Origin                                    ");
+        System.out.println(ColorFullTextsAndBackground.GREEN+"                             3-Destination                                 ");
+        System.out.println(ColorFullTextsAndBackground.PURPLE+"                                4-Price                                    ");
+        System.out.println(ColorFullTextsAndBackground.BROWN+"                                5-Date                                     ");
+        System.out.println(ColorFullTextsAndBackground.YELLOW+"                                6-Time                                     ");
+        System.out.println(ColorFullTextsAndBackground.RESET+"                                0-Exit                                     ");
+        System.out.println("...........................................................................");
     }
 }

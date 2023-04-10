@@ -10,6 +10,7 @@ public class ColorFullTextsAndBackground {
     public static final String PURPLE = "\033[0;35m";  // PURPLE
     public static final String CYAN = "\033[0;36m";    // CYAN
     public static final String WHITE = "\033[0;37m";   // WHITE
+    public static final String BROWN = "\033[38;5;94m";
 
     // Bold
     public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
@@ -71,5 +72,6 @@ public class ColorFullTextsAndBackground {
     public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
     public static final String Backgroundcolor1 = "\033[38;5;30;6;77m";
+    public static final String BACKGROUND_COLOR_2 = "\033[48;5;240m";
 
 }

@@ -2,7 +2,14 @@ import java.io.IOException;
 import java.lang.Thread;
 public class TextArt {
 
+    public static void paypal(){
+        System.out.println(ColorFullTextsAndBackground.BLUE_BOLD+"               ___           ___      _ ");
+        System.out.println("               | _ \\__ _ _  _| _ \\__ _| |");
+        System.out.println("               |  _/ _` | || |  _/ _` | |");
+        System.out.println("               |_| \\__,_|\\_, |_| \\__,_|_|");
+        System.out.println("                         |__/            "+ColorFullTextsAndBackground.RESET);
 
+    }
 
     public static void showAirlineReservationSystem(){
         System.out.println(ColorFullTextsAndBackground.CYAN+"   ____ _(______/ (_____  ___     ________  ________  ______   ______ _   _(_____  ____     _______  _______/ /____  ____ ___ ");
