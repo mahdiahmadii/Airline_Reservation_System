@@ -26,7 +26,7 @@ public class Main {
         users.setAdmin(admin);
 
         System.out.print(ColorFullTextsAndBackground.CYAN);
-        //TextArt.animationplne();
+        TextArt.animationplne();
         TextArt.cls();
         System.out.print(ColorFullTextsAndBackground.YELLOW);
         //TextArt.welcome();

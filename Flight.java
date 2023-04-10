@@ -9,6 +9,7 @@ public class Flight {
     private int seats;
     private String flightID;
     private String date;
+    private boolean adminChangePermission= true;
 
     //-------------------------------------------------------
 
@@ -93,5 +94,13 @@ public class Flight {
 
     public void setSeats(int seats) {
         this.seats = seats;
+    }
+
+    public boolean isAdminChangePermission() {
+        return adminChangePermission;
+    }
+
+    public void setAdminChangePermission(boolean adminChangePermission) {
+        this.adminChangePermission = adminChangePermission;
     }
 }

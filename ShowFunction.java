@@ -1,4 +1,4 @@
-import java.sql.SQLOutput;
+
 import java.util.Scanner;
 import java.util.Random;
 import java.lang.Thread;
@@ -194,7 +194,7 @@ public class ShowFunction {
 
     /**
      * This function use for adding charge!
-     * @param user
+     * @param user the user which we want to add him charge!
      */
     public static void showAddChargeMenu(SimpleUser user)
     {
@@ -334,60 +334,61 @@ public class ShowFunction {
         {
             while(Flights.flight[i].getFlightID().equals(id))
             {
-                System.out.println("which one you want to update?");
-                System.out.println(ColorFullTextsAndBackground.RED+"1-origin");
-                System.out.println(ColorFullTextsAndBackground.BLUE+"2-destination");
-                System.out.println(ColorFullTextsAndBackground.GREEN+"3-date");
-                System.out.println(ColorFullTextsAndBackground.CYAN+"4-time");
-                System.out.println(ColorFullTextsAndBackground.YELLOW+"5-price");
-                System.out.println(ColorFullTextsAndBackground.PURPLE+"6-seats");
-                System.out.println("0-LogOut");
-                System.out.print(">>");
-                String commandForUpdate = input.next();
-                while(commandForUpdate.equals("1"))
-                {
-                    System.out.print("input the new origin: ");
-                    Flights.flight[i].setOrigin(input.next());
-                    System.out.println("Updated successfully!");
-                    break;
+                if(Flights.flight[i].isAdminChangePermission()) {
+                    System.out.println("which one you want to update?");
+                    System.out.println(ColorFullTextsAndBackground.RED + "1-origin");
+                    System.out.println(ColorFullTextsAndBackground.BLUE + "2-destination");
+                    System.out.println(ColorFullTextsAndBackground.GREEN + "3-date");
+                    System.out.println(ColorFullTextsAndBackground.CYAN + "4-time");
+                    System.out.println(ColorFullTextsAndBackground.YELLOW + "5-price");
+                    System.out.println(ColorFullTextsAndBackground.PURPLE + "6-seats");
+                    System.out.println("0-LogOut");
+                    System.out.print(">>");
+                    String commandForUpdate = input.next();
+                    while (commandForUpdate.equals("1")) {
+                        System.out.print("input the new origin: ");
+                        Flights.flight[i].setOrigin(input.next());
+                        System.out.println("Updated successfully!");
+                        break;
+                    }
+                    while (commandForUpdate.equals("2")) {
+                        System.out.print("input the new destination: ");
+                        Flights.flight[i].setDestination(input.next());
+                        System.out.println("Updated successfully!");
+                        break;
+                    }
+                    while (commandForUpdate.equals("3")) {
+                        System.out.print("input the new date: ");
+                        Flights.flight[i].setDate(input.next());
+                        System.out.println("Updated successfully!");
+                        break;
+                    }
+                    while (commandForUpdate.equals("4")) {
+                        System.out.print("input the new time: ");
+                        Flights.flight[i].setTime(input.next());
+                        System.out.println("Updated successfully!");
+                        break;
+                    }
+                    while (commandForUpdate.equals("5")) {
+                        System.out.print("input the price : ");
+                        Flights.flight[i].setPrice(input.nextInt());
+                        System.out.println("Updated successfully!");
+                        break;
+                    }
+                    while (commandForUpdate.equals("6")) {
+                        System.out.print("input the new seats : ");
+                        Flights.flight[i].setSeats(input.nextInt());
+                        System.out.println("Updated successfully!");
+                        break;
+                    }
+                    if (commandForUpdate.equals("0")) {
+                        break;
+                    }
                 }
-                while(commandForUpdate.equals("2"))
-                {
-                    System.out.print("input the new destination: ");
-                    Flights.flight[i].setDestination(input.next());
-                    System.out.println("Updated successfully!");
-                    break;
-                }
-                while(commandForUpdate.equals("3"))
-                {
-                    System.out.print("input the new date: ");
-                    Flights.flight[i].setDate(input.next());
-                    System.out.println("Updated successfully!");
-                    break;
-                }
-                while(commandForUpdate.equals("4"))
-                {
-                    System.out.print("input the new time: ");
-                    Flights.flight[i].setTime(input.next());
-                    System.out.println("Updated successfully!");
-                    break;
-                }
-                while(commandForUpdate.equals("5"))
-                {
-                    System.out.print("input the price : ");
-                    Flights.flight[i].setPrice(input.nextInt());
-                    System.out.println("Updated successfully!");
-                    break;
-                }
-                while(commandForUpdate.equals("6"))
-                {
-                    System.out.print("input the new seats : ");
-                    Flights.flight[i].setSeats(input.nextInt());
-                    System.out.println("Updated successfully!");
-                    break;
-                }
-                if(commandForUpdate.equals("0"))
-                {
+                else if(!Flights.flight[i].isAdminChangePermission()){
+                    System.out.println("unable to change this flight because some user have already booked tickets!");
+                    System.out.println("press enter to continue...");
+                    input.nextLine();
                     break;
                 }
             }
@@ -404,6 +405,7 @@ public class ShowFunction {
     public static void showRemoveFlight(){
         Scanner input = new Scanner(System.in);
         while(true) {
+            boolean removedSuccessfully = false;
             TextArt.cls();
             ShowFunction.showFlightCharts();
             System.out.println("..............................................................");
@@ -421,14 +423,26 @@ public class ShowFunction {
             }
             for (int i = 0; i < Flights.n; i++) {
                 if (Flights.flight[i].getFlightID().equals(removedId)) {
-                    for (int j = i; j < Flights.n - 1; j++) {
-                        Flights.flight[j] = Flights.flight[j + 1];
+
+                    if(Flights.flight[i].isAdminChangePermission()) {
+                        for (int j = i; j < Flights.n - 1; j++) {
+                            Flights.flight[j] = Flights.flight[j + 1];
+                        }
+                        Flights.n = Flights.n - 1;
+                        removedSuccessfully = true;
+                        break;
                     }
-                    Flights.n = Flights.n - 1;
-                    break;
+                    else if (!Flights.flight[i].isAdminChangePermission()){
+                        System.out.println("unable to remove this flight because many users have already booked it!");
+                        System.out.println("press enter to continue...");
+                        input.nextLine();
+                        break;
+                    }
                 }
             }
-            System.out.println("The flight " + removedId + "has been removed!");
+            if(removedSuccessfully) {
+                System.out.println("The flight " + removedId + "has been removed!");
+            }
             System.out.println("press 0 to return to admin main menu");
             System.out.print(">>");
             String command = input.next();
@@ -523,6 +537,7 @@ public class ShowFunction {
                     String uniqTicketID = uniqStringGenerator(20);
                     Flights.flight[j].setSeats(Flights.flight[j].getSeats()-1);
                     sample.setCharge(sample.getCharge()-Flights.flight[j].getPrice());
+                    Flights.flight[j].setAdminChangePermission(false);
 
 
                     Ticket ticket = new Ticket(flightID, origin, destination, date, time, price, passengerName, uniqTicketID);
@@ -632,9 +647,11 @@ public class ShowFunction {
     }
 //***************************************************************************************************************************
 
+    /**
+     * this function use to filter the flight schedule by user requests!
+     */
     public static void filteringTheFlights()
     {
-        Filteredflight filterchart = new Filteredflight();
         int t = 0;
         while(t==0){
             Scanner input = new Scanner(System.in);
