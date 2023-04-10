@@ -9,11 +9,12 @@ import java.lang.Thread;
 public class ShowFunction {
     public static void optionMenu() {
         TextArt.cls();
-        System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+        System.out.println(ColorFullTextsAndBackground.Backgroundcolor1+":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
         System.out.print(ColorFullTextsAndBackground.WHITE_BOLD);
-        System.out.println("               Airline Reservation System                  ");
+        TextArt.showAirlineReservationSystem();
+        //System.out.println("               Airline Reservation System                  ");
         System.out.print(ColorFullTextsAndBackground.RESET);
-        System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+        System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
         System.out.print(ColorFullTextsAndBackground.BLUE_BOLD);
         System.out.println("                      <1> SIGN IN                          ");
         System.out.print(ColorFullTextsAndBackground.RED_BOLD);

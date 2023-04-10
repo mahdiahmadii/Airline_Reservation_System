@@ -3,6 +3,16 @@ import java.lang.Thread;
 public class TextArt {
 
 
+
+    public static void showAirlineReservationSystem(){
+        System.out.println(ColorFullTextsAndBackground.CYAN+"   ____ _(______/ (_____  ___     ________  ________  ______   ______ _   _(_____  ____     _______  _______/ /____  ____ ___ ");
+        System.out.println(" / __ `/ / ___/ / / __ \\/ _ \\   / ___/ _ \\/ ___/ _ \\/ ___| | / / __ `/ __/ / __ \\/ __ \\   / ___/ / / / ___/ __/ _ \\/ __ `__ ");
+        System.out.println("/ /_/ / / /  / / / / / /  __/  / /  /  __(__  /  __/ /   | |/ / /_/ / /_/ / /_/ / / / /  (__  / /_/ (__  / /_/  __/ / / / / /");
+        System.out.println("\\__,_/_/_/  /_/_/_/ /_/\\___/  /_/   \\___/____/\\___/_/    |___/\\__,_/\\__/_/\\____/_/ /_/  /____/\\__, /____/\\__/\\___/_/ /_/ /_/ ");
+        System.out.println("                                                                                             /____/"+ColorFullTextsAndBackground.RESET);
+    }
+    //---------------------------------------------------------------------------------------------------------------
+
     /**
      * function use to show a "welcome" text in a special format for 1 second
      */
@@ -13,7 +23,7 @@ public class TextArt {
         System.out.println("                █░░╚╩╝╚╝╚╝╚╝╚╝╩─╩╚╝░░█");
         System.out.println("                █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█");
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
