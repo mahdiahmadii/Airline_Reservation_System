@@ -6,7 +6,7 @@ public class SimpleUser {
     private String userPass;
     private int charge;
     private String name;
-    public Ticket[] userTicket = new Ticket[10];
+    public Ticket[] userTicket = new Ticket[30];
     public int k;//number of elements in the userTicket list
 
     //__________________________________________________________

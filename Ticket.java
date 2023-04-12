@@ -8,7 +8,7 @@ public class Ticket {
     private String date ;
     private String time;
     private int price;
-    private String passangerName;
+    private String passengerName;
     private String ticketId ;
 
     //--------------------------------------------------------------------------------constructor
@@ -32,7 +32,7 @@ public class Ticket {
         this.date =date;
         this.time = time;
         this.price = price;
-        this.passangerName = passangerName;
+        this.passengerName = passangerName;
         this.ticketId = ticketId;
     }
 
@@ -91,11 +91,11 @@ public class Ticket {
     }
 
     public String getPassangerName() {
-        return passangerName;
+        return passengerName;
     }
 
     public void setPassangerName(String passangerName) {
-        this.passangerName = passangerName;
+        this.passengerName = passangerName;
     }
 
     public String getTicketId() {

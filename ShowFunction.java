@@ -162,12 +162,15 @@ public class ShowFunction {
         String user_name = input.next();
         System.out.print("password:");
         String user_pass = input.next();
+        boolean findUser = false;
+        boolean truePassword = true;
         for (int i = 0; i < Users.n ; i++)
         {
             if (user_name.equals(Users.simpleUsers[i].getUserName())) {
-
-
+                truePassword = false;
+                findUser = true;
                 while (user_pass.equals(Users.simpleUsers[i].getUserPass())) {//simple user log in:
+                    truePassword = true;
                     ShowFunction.simpleUserSignInMenu();
                     String command = input.next();
                     while(command.equals("1"))//change password
@@ -209,11 +212,17 @@ public class ShowFunction {
                         break;
                     }
                 }
+
+
             }
+
             else if(user_name.equals("admin"))
             {
+                truePassword = false;
+                findUser = true;
                 while(user_pass.equals("admin"))//admin log in menu
                 {
+                    truePassword = true;
                     ShowFunction.adminMenuShow();
                     String command = input.next();
                     adminSignInMenu(command);
@@ -222,6 +231,14 @@ public class ShowFunction {
                         break;
                     }
                 }
+            }
+            if(findUser==false)
+            {
+                System.out.println(ColorFullTextsAndBackground.RED+"There is not any account by this Username!"+ColorFullTextsAndBackground.RESET);
+            }
+            if(truePassword==false)
+            {
+                System.out.println(ColorFullTextsAndBackground.RED+"Wrong password!!!"+ColorFullTextsAndBackground.RESET);
             }
         }
     }
@@ -651,7 +668,7 @@ public class ShowFunction {
                     String origin = Flights.flight[j].getOrigin();
                     String destination = Flights.flight[j].getDestination();
                     String date = Flights.flight[j].getDate();
-                    String time = Flights.flight[j].getOrigin();
+                    String time = Flights.flight[j].getTime();
                     int price = Flights.flight[j].getPrice();
                     String passengerName = sample.getUsername();
                     String uniqTicketID = uniqStringGenerator(20);
@@ -717,7 +734,7 @@ public class ShowFunction {
 //***********************************************************************************************************************************************
 
     /**
-     * Function that cancel a flight Ticket reservation!
+     * Function that a flight Ticket reservation!
      * @param sample
      */
     public static void ticketCancellation(SimpleUser sample)
@@ -986,6 +1003,10 @@ public class ShowFunction {
         TextArt.cls();
     }
     //****************************************************************************************************************************
+
+    /**
+     * This function used to Filter the flights with the feature which user order and show them!
+     */
     public static void printFilterFlightMenu()
     {
         showFlightCharts();
